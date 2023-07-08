@@ -1,7 +1,6 @@
 export interface nav {
     pageName: string;
     link: string;
- 
   }
   
   
