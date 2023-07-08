@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-
+import Link from 'next/link'
 import {
   AppBar,
   Box,
@@ -22,8 +22,10 @@ import AdbIcon from '@mui/icons-material/Adb'
 import { Theme, ThemeProvider } from '@mui/material'
 import { theme } from '@/theme/theme'
 import { ButtonTheme } from '@/theme/theme'
+import { NavbarLinks } from '@/constants/types'
+import { NavList } from '@/constants'
 
-export const Navbar = () => {
+export const Navbar: React.FC<NavbarLinks> = ({ NavLinks }) => {
   const pages = ['Home', 'Text-ER', 'ER-SQL', 'CSV-SQL']
   const settings = ['Logout']
 
@@ -61,15 +63,16 @@ export const Navbar = () => {
             <Toolbar disableGutters>
               <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
               <Typography
-                variant="h6"
+                variant="h5"
                 noWrap
                 component="a"
                 href="/"
                 sx={{
-                  mr: 2,
+                  mr: 5,
                   display: { xs: 'none', md: 'flex' },
-                  fontFamily: 'monospace',
+                  fontFamily: 'worksans',
                   fontWeight: 800,
+
                   letterSpacing: '.2rem',
                   color: 'inherit',
                   textDecoration: 'none',
@@ -112,22 +115,24 @@ export const Navbar = () => {
                     display: { xs: 'block', md: 'none' },
                   }}
                 >
-                  {pages.map(page => (
+                  {NavList.map((page, index) => (
                     <MenuItem
-                      key={page}
+                      key={page.pageName}
                       onClick={handleCloseNavMenu}
                       sx={{
                         background: theme.palette.secondary.main,
                         color: theme.palette.primary.main,
                       }}
                     >
-                      <Button
-                        variant="outlined"
-                        color="primary"
-                        sx={{ minWidth: '7rem' }}
-                      >
-                        {page}
-                      </Button>
+                      <Link href={page.link}>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          sx={{ minWidth: '7rem' }}
+                        >
+                          {page.pageName}
+                        </Button>
+                      </Link>
                     </MenuItem>
                   ))}
                 </Menu>
@@ -152,7 +157,28 @@ export const Navbar = () => {
                 SQL-GPT
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                {pages.map(page => (
+                {NavList.map((page, index) => (
+                  <>
+                    <Link href={page.link}>
+                      <Button
+                        key={page.pageName}
+                        variant="outlined"
+                        color="primary"
+                        onClick={handleCloseNavMenu}
+                        sx={{
+                          my: 2,
+                          px: 3,
+                          ml: 3,
+                          display: 'block',
+                        }}
+                      >
+                        {page.pageName}
+                      </Button>
+                    </Link>
+                  </>
+                ))}
+
+                {/* {pages.map(page => (
                   <Button
                     key={page}
                     variant="outlined"
@@ -167,7 +193,7 @@ export const Navbar = () => {
                   >
                     {page}
                   </Button>
-                ))}
+                ))} */}
               </Box>
 
               <Box
