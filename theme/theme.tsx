@@ -68,9 +68,11 @@ const theme = createTheme({
 })
 
 const ButtonTheme = createTheme({
-  palette: {
-    primary: {
-      main: colorSchemes[0].primary,
+  typography: {
+    button: {
+      fontSize: '14px',
+      textTransform: 'uppercase',
+      color: colorSchemes[0].primary,
     },
   },
 })
