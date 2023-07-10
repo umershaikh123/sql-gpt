@@ -74,7 +74,7 @@ const NewChatButton: React.FC<NewChatButtonProps> = ({ url }) => {
     setChats(updatedChats)
 
     try {
-      const response = await fetch('/api/chats', {
+      const response = await fetch('/api/data', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
