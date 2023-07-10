@@ -21,24 +21,33 @@ import { theme } from '@/theme/theme'
 import { Children } from 'react'
 import { ChatHistory } from '@/components/chatHistory'
 import { ChatModel } from '@/components/chatModel'
-
+import { useCompletion, useChat } from 'ai/react'
 const Chat = () => {
+  // const { completion, input, handleInputChange, handleSubmit } = useCompletion()
+
+  const { messages, input, handleInputChange, handleSubmit } = useChat()
+
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Box
-          sx={{
-            flexGrow: 2,
-            flexBasis: '60rem',
-            flexShrink: 3,
-
-            height: '80vh',
-            background: theme.palette.secondary.main,
-          }}
-        >
-          {' '}
-        </Box>
-      </ThemeProvider>
+      <div className="mx-auto w-full max-w-md py-24 flex flex-col stretch">
+        {messages.map(m => (
+          <div key={m.id}>
+            {m.role === 'user' ? 'User: ' : 'AI: '}
+            {m.content}
+          </div>
+        ))}
+        <form onSubmit={handleSubmit}>
+          <label>
+            Say something...
+            <input
+              className="fixed w-full max-w-md bottom-0 border border-gray-300 rounded mb-8 shadow-xl p-2"
+              value={input}
+              onChange={handleInputChange}
+            />
+          </label>
+          <button type="submit">Send</button>
+        </form>
+      </div>
     </>
   )
 }
