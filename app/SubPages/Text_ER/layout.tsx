@@ -43,7 +43,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               background: theme.palette.secondary.main,
             }}
           >
-            <ChatHistory url={'Text_ER'} />
+            <ChatHistory url={'Text_ER'} type={'TextER'} />
           </Box>
 
           <Box

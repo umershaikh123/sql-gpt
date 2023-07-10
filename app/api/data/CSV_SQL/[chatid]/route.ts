@@ -25,7 +25,7 @@ interface Chat {
 
  try {
   const chatId = params.params.chatid;
-  const chatsFilePath = './chats.json'; // Path to the chats.json file
+  const chatsFilePath = './CSV_SQL_chats.json'; // Path to the chats.json file
 
   const chatsData: Chat[] = JSON.parse(await fsPromises.readFile(chatsFilePath, 'utf-8'));
 

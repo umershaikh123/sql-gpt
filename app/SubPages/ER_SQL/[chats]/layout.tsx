@@ -22,8 +22,6 @@ import { Children } from 'react'
 import { ChatHistory } from '@/components/chatHistory'
 import { ChatModel } from '@/components/chatModel'
 
-export default function Page() {
-  return <></>
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>
 }
-
-//        <ChatHistory url={'ER_SQL'} type={'ErSQL'} />

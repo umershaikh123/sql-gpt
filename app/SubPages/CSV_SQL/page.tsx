@@ -25,56 +25,9 @@ import { ChatModel } from '@/components/chatModel'
 export default function Page() {
   return (
     <>
-      <>
-        <ThemeProvider theme={theme}>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            spacing={5}
-            sx={{ p: 5 }}
-          >
-            <Box
-              sx={{
-                flexGrow: 0,
-                flexBasis: '20rem',
-                flexShrink: 10,
-                height: '80vh',
-
-                background: theme.palette.secondary.main,
-              }}
-            >
-              <ChatHistory />
-            </Box>
-
-            <Box
-              sx={{
-                flexGrow: 2,
-                flexBasis: '60rem',
-                flexShrink: 3,
-
-                height: '80vh',
-                background: theme.palette.secondary.main,
-              }}
-            >
-              {' '}
-              CSV to SQL
-            </Box>
-            <Box
-              sx={{
-                flexGrow: 0,
-                flexBasis: '20rem',
-                flexShrink: 10,
-
-                height: '80vh',
-                background: theme.palette.secondary.main,
-              }}
-            >
-              <ChatModel />
-            </Box>
-          </Stack>
-        </ThemeProvider>
-      </>
+      <></>
     </>
   )
 }
+
+//  <ChatHistory url={'CSV_SQL'} type={'CsvSQL'} />

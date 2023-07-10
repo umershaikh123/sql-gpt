@@ -25,13 +25,14 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import { ButtonTheme } from '@/theme/theme'
 import { ThemeProvider } from '@mui/material'
 
-import { NewChatButton } from './NewChatButton'
+import { NewChatButton, TextER, CsvSQL, ErSQL } from './NewChatButton'
 
 interface ChatHistoryProps {
   url: string
+  type: string
 }
 
-export const ChatHistory: React.FC<ChatHistoryProps> = ({ url }) => {
+export const ChatHistory: React.FC<ChatHistoryProps> = ({ url, type }) => {
   return (
     <>
       <Box sx={{ mt: 2, mx: 2 }}>
@@ -54,33 +55,25 @@ export const ChatHistory: React.FC<ChatHistoryProps> = ({ url }) => {
             alignItems="center"
             spacing={2}
           >
-            <NewChatButton url={url} />
+            {type === 'TextER' && (
+              <>
+                <TextER url={url} />
+              </>
+            )}
 
-            {/* history */}
-            {/* <Button
-              variant="outlined"
-              color="primary"
-              startIcon={<ChatBubbleOutlineOutlinedIcon />}
-              endIcon={<DeleteOutlineOutlinedIcon />}
-              sx={{
-                textTransform: 'capitalize',
-                minWidth: '12rem',
-              }}
-            >
-              <Typography
-                variant="subtitle2"
-                sx={{
-                  maxWidth: '7rem',
-                  fontSize: '12px',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
+            {type === 'ErSQL' && (
+              <>
+                <ErSQL url={url} />
+              </>
+            )}
 
-                  textOverflow: 'ellipsis',
-                }}
-              >
-                Ai prompt for for for
-              </Typography>
-            </Button> */}
+            {type === 'CsvSQL' && (
+              <>
+                <CsvSQL url={url} />
+              </>
+            )}
+
+            {/* <NewChatButton url={url} /> */}
           </Stack>
 
           <div className=" jus"></div>

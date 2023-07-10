@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   const jsonChats = JSON.stringify(chats, null, 2);
 
   try {
-    await fsPromises.writeFile('chats.json', jsonChats);
+    await fsPromises.writeFile('Text_ER_chats.json', jsonChats);
     return NextResponse.json({ message: 'Chats saved successfully' });
   } catch (error) {
     console.error(error);
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 export async function GET(request:Request) {
    
       try {
-        const fileData = await fsPromises.readFile('chats.json', 'utf-8');
+        const fileData = await fsPromises.readFile('Text_ER_chats.json', 'utf-8');
         const chats: Chat[] = JSON.parse(fileData);
   
         return NextResponse.json(chats);
