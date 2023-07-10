@@ -25,8 +25,7 @@ import { ButtonTheme } from '@/theme/theme'
 import { NavbarLinks } from '@/constants/types'
 import { NavList } from '@/constants'
 
-export const Navbar: React.FC<NavbarLinks> = ({ NavLinks }) => {
-  const pages = ['Home', 'Text-ER', 'ER-SQL', 'CSV-SQL']
+export const Navbar = () => {
   const settings = ['Logout']
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -115,7 +114,7 @@ export const Navbar: React.FC<NavbarLinks> = ({ NavLinks }) => {
                     display: { xs: 'block', md: 'none' },
                   }}
                 >
-                  {NavList.map((page, index) => (
+                  {NavList.map(page => (
                     <MenuItem
                       key={page.pageName}
                       onClick={handleCloseNavMenu}
@@ -157,7 +156,7 @@ export const Navbar: React.FC<NavbarLinks> = ({ NavLinks }) => {
                 SQL-GPT
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                {NavList.map((page, index) => (
+                {NavList.map(page => (
                   <>
                     <Link href={page.link}>
                       <Button
@@ -177,23 +176,6 @@ export const Navbar: React.FC<NavbarLinks> = ({ NavLinks }) => {
                     </Link>
                   </>
                 ))}
-
-                {/* {pages.map(page => (
-                  <Button
-                    key={page}
-                    variant="outlined"
-                    color="primary"
-                    onClick={handleCloseNavMenu}
-                    sx={{
-                      my: 2,
-                      px: 3,
-                      ml: 3,
-                      display: 'block',
-                    }}
-                  >
-                    {page}
-                  </Button>
-                ))} */}
               </Box>
 
               <Box

@@ -19,6 +19,8 @@ import { styled } from '@mui/material/styles'
 import { ThemeProvider } from '@mui/material'
 import { theme } from '@/theme/theme'
 import { Children } from 'react'
+import { ChatHistory } from '@/components/chatHistory'
+import { ChatModel } from '@/components/chatModel'
 
 export default function Page() {
   return (
@@ -42,7 +44,7 @@ export default function Page() {
                 background: theme.palette.secondary.main,
               }}
             >
-              box1
+              <ChatHistory />
             </Box>
 
             <Box
@@ -68,7 +70,7 @@ export default function Page() {
                 background: theme.palette.secondary.main,
               }}
             >
-              box3
+              <ChatModel />
             </Box>
           </Stack>
         </ThemeProvider>

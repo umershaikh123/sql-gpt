@@ -25,7 +25,13 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import { ButtonTheme } from '@/theme/theme'
 import { ThemeProvider } from '@mui/material'
 
-export const ChatHistory = () => {
+import { NewChatButton } from './NewChatButton'
+
+interface ChatHistoryProps {
+  url: string
+}
+
+export const ChatHistory: React.FC<ChatHistoryProps> = ({ url }) => {
   return (
     <>
       <Box sx={{ mt: 2, mx: 2 }}>
@@ -48,21 +54,10 @@ export const ChatHistory = () => {
             alignItems="center"
             spacing={2}
           >
-            <Button
-              variant="outlined"
-              color="primary"
-              startIcon={<AddOutlinedIcon />}
-              sx={{
-                fontSize: '14px',
-                textTransform: 'capitalize',
-                minWidth: '12rem',
-              }}
-            >
-              New generation
-            </Button>
+            <NewChatButton url={url} />
 
             {/* history */}
-            <Button
+            {/* <Button
               variant="outlined"
               color="primary"
               startIcon={<ChatBubbleOutlineOutlinedIcon />}
@@ -85,7 +80,7 @@ export const ChatHistory = () => {
               >
                 Ai prompt for for for
               </Typography>
-            </Button>
+            </Button> */}
           </Stack>
 
           <div className=" jus"></div>
@@ -98,7 +93,7 @@ export const ChatHistory = () => {
             spacing={2}
             sx={{}}
           >
-            <Button
+            {/* <Button
               variant="outlined"
               color="primary"
               startIcon={<DeleteOutlineOutlinedIcon />}
@@ -109,7 +104,7 @@ export const ChatHistory = () => {
               }}
             >
               Clear Converstations
-            </Button>
+            </Button> */}
             <Button
               variant="outlined"
               color="primary"

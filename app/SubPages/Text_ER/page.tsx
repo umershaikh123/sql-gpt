@@ -26,7 +26,7 @@ export default function Page() {
   return (
     <>
       <>
-        <ThemeProvider theme={theme}>
+        {/* <ThemeProvider theme={theme}>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -73,7 +73,7 @@ export default function Page() {
               <ChatModel />
             </Box>
           </Stack>
-        </ThemeProvider>
+        </ThemeProvider> */}
       </>
     </>
   )
