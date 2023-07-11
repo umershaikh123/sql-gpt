@@ -70,10 +70,24 @@ export default function Page() {
   })
 
   return (
-    <>
-      <h1 className="text-3xl ">Login Page</h1>
-      <div className={`   `}>
-        {/* <Radio
+    <html lang="en">
+      <head>
+        <title>SQL GPT</title>
+        <link
+          href="/Images/vercel.svg"
+          rel="apple-touch-icon"
+          sizes="180x180"
+        />
+      </head>
+      <body>
+        <h1 className="text-3xl ">Login Page</h1>
+      </body>
+    </html>
+  )
+}
+
+{
+  /* <Radio
           {...controlProps('a')}
           sx={{
             color: `${primary}`,
@@ -117,8 +131,5 @@ export default function Page() {
               color: pink[600],
             },
           }}
-        /> */}
-      </div>
-    </>
-  )
+        /> */
 }

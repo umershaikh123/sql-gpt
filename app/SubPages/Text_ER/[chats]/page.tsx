@@ -35,7 +35,7 @@ const darkGreen = theme.palette.border.main
 
 const CssTextField = styled(TextField)({
   transition: 'all 0.3s ease-in-out',
-  backgroundColor: theme.palette.background.main,
+  backgroundColor: theme.palette.background.default,
 
   '& label': { color: theme.palette.border.main },
   '& helperText': { color: theme.palette.primary.main },

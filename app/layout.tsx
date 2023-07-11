@@ -18,11 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title>SQL GPT</title>
-        <link
-          href="./Images/vercel.svg"
-          rel="apple-touch-icon"
-          sizes="180x180"
-        />
+        <link href="/Images/vercel.svg" sizes="180x180" />
       </head>
       <body className={inter.className}>
         <div className=" container mx-auto">
