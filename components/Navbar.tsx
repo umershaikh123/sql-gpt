@@ -187,7 +187,7 @@ export const Navbar = () => {
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
                       alt="profile"
-                      src="./Images/profile.jpg"
+                      src="/Images/profile.jpg"
                       sx={{ width: '50px', height: '50px' }}
                     />
                   </IconButton>

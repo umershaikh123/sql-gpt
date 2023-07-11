@@ -21,7 +21,9 @@ const colorSchemes = [
     primary: '#FF4081',
     secondary: '#070204',
     background: '#000000',
-    chatBackground: '#0D0609',
+    // chatBackground: '#0D0609',
+    chatBackground: '#150A0E',
+
     border: '#92294C',
   },
   {

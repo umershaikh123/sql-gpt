@@ -25,7 +25,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import { ButtonTheme } from '@/theme/theme'
 import { ThemeProvider } from '@mui/material'
 
-import { NewChatButton, TextER, CsvSQL, ErSQL } from './NewChatButton'
+import { TextER, CsvSQL, ErSQL } from './NewChatButton'
 
 interface ChatHistoryProps {
   url: string

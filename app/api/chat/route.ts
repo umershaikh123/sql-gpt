@@ -4,8 +4,12 @@ import { Configuration, OpenAIApi } from "openai-edge";
 
 const config = new Configuration({
 	// apiKey: process.env.OPENAI_API_KEY,
+//   apiKey:  
+//   "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" ,
+
   apiKey:  
-  "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" ,
+  "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" ,
+  
 });
 const openai = new OpenAIApi(config);
 

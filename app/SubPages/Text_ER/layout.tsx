@@ -59,7 +59,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Typography
               variant="h3"
               sx={{
-                fontSize: '32px',
+                fontSize: '24px',
                 whiteSpace: 'nowrap',
               }}
             >
