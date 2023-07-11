@@ -98,19 +98,6 @@ export const postMessage = async (ChatId: string, Messages: Message[]) => {
   }
 }
 
-const Messages: Message[] = [
-  { id: '1', role: 'user', content: 'hey' },
-  { id: '2', role: 'assistant', content: 'Hello! How can I assist you today?' },
-  { id: '3', role: 'user', content: 'just testing my new application' },
-  { id: '3', role: 'user', content: 'just testing my new application' },
-  { id: '3', role: 'user', content: 'just testing my new application' },
-  { id: '3', role: 'user', content: 'just testing my new application' },
-  { id: '3', role: 'user', content: 'just testing my new application' },
-  { id: '3', role: 'user', content: 'just testing my new application' },
-  { id: '3', role: 'user', content: 'just testing my new application' },
-  { id: '3', role: 'user', content: 'just testing my new application' },
-]
-
 const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit, setMessages } =
     useChat()
@@ -118,27 +105,6 @@ const Chat = () => {
 
   const params = useParams()
   const chatId = params.chats
-
-  // const loadMessages = async () => {
-  //   try {
-  //     const response = await fetch('/api/data/TEXT_ER')
-  //     const chats = await response.json()
-
-  //     const chat = chats.find(chat => chat.id === chatId)
-  //     if (chat && chat.messages && chat.messages.Messages) {
-  //       setMessages(chat.messages.Messages)
-  //       setIsLoaded(true)
-  //     }
-  //   } catch (error) {
-  //     console.error('Error loading messages:', error)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (!isLoaded) {
-  //     loadMessages()
-  //   }
-  // }, [chatId, isLoaded])
 
   useEffect(() => {
     async function loadMessages() {
@@ -160,14 +126,11 @@ const Chat = () => {
     loadMessages()
   }, [chatId])
 
-  // const handleKeyDown = async (event: any) => {
-  //   if (event.key === 'Enter') {
-  //     // await handleSubmit(event)
-  //     // setMessages(messages)
-  //     // postMessage(chatId, messages)
-  //     handleButtonSubmit
-  //   }
-  // }
+  const handleKeyDown = async (event: any) => {
+    if (event.key === 'Enter') {
+      handleButtonSubmit(event)
+    }
+  }
 
   const handleButtonSubmit = async (event: any) => {
     event.preventDefault()
@@ -281,7 +244,7 @@ const Chat = () => {
                 multiline
                 value={input}
                 onChange={handleInputChange}
-                // onKeyDown={handleKeyDown}
+                onKeyDown={handleKeyDown}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment

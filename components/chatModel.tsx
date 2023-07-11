@@ -67,7 +67,7 @@ export default function SelectTextFields() {
             id="outlined-select-currency"
             select
             label="Model"
-            defaultValue="gpt4"
+            defaultValue="gpt3.5"
             helperText={<HelperText>Please select your GPT model</HelperText>}
             SelectProps={{
               IconComponent: ({ className }) => (

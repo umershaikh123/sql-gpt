@@ -8,11 +8,68 @@ import { promises as fsPromises } from 'fs';
 interface Chat {
   id: string;
   title: string;
-  messages: string[];
+  messages: Message[];
 }
 
+interface Message {
+  id: string
+  role: 'function' | 'user' | 'assistant' | 'system'
+  content: string
+}
+
+
+
+export async function POST(req: Request ,  params: { params: { chatid: string } } ) {
  
+
+  try {
+    const chatId = params.params.chatid;
+    const  messages   = await req.json();
+   
+    console.log("M1" , messages);
+  
+  
+  const chatsFilePath = './CSV_SQL_chats.json'; // Path to the chats.json file
+
  
+  // Read the existing chats data from the JSON file
+  
+  
+  const chatsData: Chat[] = JSON.parse(await fsPromises.readFile(chatsFilePath, 'utf-8'));
+
+const chatIndex = chatsData.findIndex((chat) => chat.id === chatId);
+
+console.log("chatIndex" , chatIndex);
+console.log("chatsData" , chatsData);
+
+  if (chatIndex !== -1) {
+    // Update the messages for the chat
+    chatsData[chatIndex].messages = messages;
+    console.log(" chatsData[chatIndex].messages" ,  chatsData[chatIndex].messages);
+    // Write the updated chats data back to the JSON file
+    
+     
+    await fsPromises.writeFile(chatsFilePath, JSON.stringify(chatsData, null, 2));
+  
+
+
+
+    return NextResponse.json({ result: 'Messages saved successfully' });
+  } else {
+    NextResponse.json({ result: 'Chat not found' }, { status: 400 });
+  }
+ 
+
+}
+
+catch (error) {
+  console.error(error);
+  return NextResponse.json({ result: 'Internal Server Error2' }, { status: 500 });
+}
+
+
+}
+
 
  
 
