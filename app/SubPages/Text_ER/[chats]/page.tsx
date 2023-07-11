@@ -20,7 +20,7 @@ import {
 import { styled } from '@mui/material/styles'
 import { ThemeProvider } from '@mui/material'
 import { theme } from '@/theme/theme'
-import { Children } from 'react'
+import { Children, useEffect } from 'react'
 import { ChatHistory } from '@/components/chatHistory'
 import { ChatModel } from '@/components/chatModel'
 import { useCompletion, useChat } from 'ai/react'
@@ -29,13 +29,15 @@ import { useParams } from 'next/navigation'
 import SendIcon from '@mui/icons-material/Send'
 import InputAdornment from '@mui/material/InputAdornment'
 import Image from 'next/image'
+import { useState } from 'react'
+// import { Message } from 'ai/react'
 
 const mainPrimary = theme.palette.primary.main
 const darkGreen = theme.palette.border.main
 
 const CssTextField = styled(TextField)({
   transition: 'all 0.3s ease-in-out',
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.secondary.main,
 
   '& label': { color: theme.palette.border.main },
   '& helperText': { color: theme.palette.primary.main },
@@ -70,17 +72,109 @@ const CssTextField = styled(TextField)({
   },
 })
 
-const Chat = () => {
-  // const { completion, input, handleInputChange, handleSubmit } = useCompletion()
+interface Message {
+  id: string
+  role: 'function' | 'user' | 'assistant' | 'system'
+  content: string
+}
 
-  const { messages, input, handleInputChange, handleSubmit } = useChat()
+export const postMessage = async (ChatId: string, Messages: Message[]) => {
+  try {
+    const response = await fetch(`/api/data/TEXT_ER/${ChatId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ Messages }),
+    })
+
+    if (response.ok) {
+      console.log('Messages saved successfully')
+    } else {
+      console.log('Error saving messages')
+    }
+  } catch (error) {
+    console.log('Error saving messages')
+  }
+}
+
+const Messages: Message[] = [
+  { id: '1', role: 'user', content: 'hey' },
+  { id: '2', role: 'assistant', content: 'Hello! How can I assist you today?' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+]
+
+const Chat = () => {
+  const { messages, input, handleInputChange, handleSubmit, setMessages } =
+    useChat()
+  const [isLoaded, setIsLoaded] = useState(false)
+
   const params = useParams()
   const chatId = params.chats
 
-  const handleKeyDown = (event: any) => {
-    if (event.key === 'Enter') {
-      handleSubmit(event)
+  // const loadMessages = async () => {
+  //   try {
+  //     const response = await fetch('/api/data/TEXT_ER')
+  //     const chats = await response.json()
+
+  //     const chat = chats.find(chat => chat.id === chatId)
+  //     if (chat && chat.messages && chat.messages.Messages) {
+  //       setMessages(chat.messages.Messages)
+  //       setIsLoaded(true)
+  //     }
+  //   } catch (error) {
+  //     console.error('Error loading messages:', error)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   if (!isLoaded) {
+  //     loadMessages()
+  //   }
+  // }, [chatId, isLoaded])
+
+  useEffect(() => {
+    async function loadMessages() {
+      try {
+        const response = await fetch('/api/data/TEXT_ER/message')
+        const chats = await response.json()
+
+        const chat = chats.find(chat => chat.id === chatId)
+
+        console.log('chat.messages ', chat.messages.Messages)
+        if (chat && chat.messages && chat.messages.Messages) {
+          setMessages(chat.messages.Messages)
+        }
+      } catch (error) {
+        console.error('Error loading messages:', error)
+      }
     }
+
+    loadMessages()
+  }, [chatId])
+
+  // const handleKeyDown = async (event: any) => {
+  //   if (event.key === 'Enter') {
+  //     // await handleSubmit(event)
+  //     // setMessages(messages)
+  //     // postMessage(chatId, messages)
+  //     handleButtonSubmit
+  //   }
+  // }
+
+  const handleButtonSubmit = async (event: any) => {
+    event.preventDefault()
+    handleSubmit(event)
+
+    setMessages(messages)
+    await postMessage(chatId, messages)
   }
 
   return (
@@ -104,11 +198,12 @@ const Chat = () => {
             justifyContent="flex-start"
             alignItems="center"
             spacing={3}
+            sx={{ overflow: 'auto' }}
           >
             {messages.map(m => (
               <div key={m.id}>
                 {m.role === 'user' ? (
-                  <div className=" w-[68rem]">
+                  <div className=" w-[65rem]">
                     <Stack
                       direction="row"
                       alignItems="center"
@@ -137,7 +232,7 @@ const Chat = () => {
                     </Stack>
                   </div>
                 ) : (
-                  <div className=" w-[68rem]">
+                  <div className=" w-[65rem]">
                     <Stack
                       direction="row"
                       alignItems="center"
@@ -176,9 +271,9 @@ const Chat = () => {
             justifyContent="flex-end"
             alignItems="center"
             spacing={2}
-            sx={{}}
+            sx={{ mt: 4 }}
           >
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleButtonSubmit}>
               <CssTextField
                 id="outlined-basic"
                 label="Prompt"
@@ -186,7 +281,7 @@ const Chat = () => {
                 multiline
                 value={input}
                 onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
+                // onKeyDown={handleKeyDown}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment
@@ -204,25 +299,6 @@ const Chat = () => {
           </Stack>
         </Stack>
       </Box>
-      {/* <div className="mx-auto w-full max-w-md py-24 flex flex-col stretch border-2">
-        {messages.map(m => (
-          <div key={m.id}>
-            {m.role === 'user' ? 'User: ' : 'AI: '}
-            {m.content}
-          </div>
-        ))}
-        <form onSubmit={handleSubmit}>
-          <label>
-            Say something...
-            <input
-              className="fixed w-full max-w-md bottom-0 border border-gray-300 rounded mb-8 shadow-xl p-2"
-              value={input}
-              onChange={handleInputChange}
-            />
-          </label>
-          <button type="submit">Send</button>
-        </form>
-      </div> */}
     </>
   )
 }
@@ -244,6 +320,29 @@ export default function Page() {
     </>
   )
 }
+
+{
+  /* <div className="mx-auto w-full max-w-md py-24 flex flex-col stretch border-2">
+        {messages.map(m => (
+          <div key={m.id}>
+            {m.role === 'user' ? 'User: ' : 'AI: '}
+            {m.content}
+          </div>
+        ))}
+        <form onSubmit={handleSubmit}>
+          <label>
+            Say something...
+            <input
+              className="fixed w-full max-w-md bottom-0 border border-gray-300 rounded mb-8 shadow-xl p-2"
+              value={input}
+              onChange={handleInputChange}
+            />
+          </label>
+          <button type="submit">Send</button>
+        </form>
+      </div> */
+}
+
 {
   /* prompt */
 }

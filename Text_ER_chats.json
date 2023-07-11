@@ -1,12 +1,22 @@
 [
   {
-    "id": "9b0364ab-3d46-49d9-9acf-556b84e68205",
-    "title": "Chat 9b0364ab-3d46-49d9-9acf-556b84e68205",
-    "messages": []
-  },
-  {
-    "id": "b748c889-700d-4df9-b9f4-2d0e906052df",
-    "title": "Chat b748c889-700d-4df9-b9f4-2d0e906052df",
-    "messages": []
+    "id": "9e970c4b-0188-423a-995e-f9aaecc1a316",
+    "title": "Chat 9e970c4b-0188-423a-995e-f9aaecc1a316",
+    "messages": {
+      "Messages": [
+        {
+          "content": "what is your name ?",
+          "role": "user",
+          "createdAt": "2023-07-11T17:17:53.840Z",
+          "id": "aob3ill"
+        },
+        {
+          "id": "xRwzdYP",
+          "createdAt": "2023-07-11T17:17:56.291Z",
+          "content": "I am an AI language model developed by OpenAI, commonly referred to as GPT-3. I don't have an individual name, as I am an artificial intelligence program. You can simply call me OpenAI or GPT-3. How can I assist you today?",
+          "role": "assistant"
+        }
+      ]
+    }
   }
 ]

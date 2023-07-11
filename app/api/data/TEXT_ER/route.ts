@@ -17,10 +17,10 @@ export async function POST(request: Request) {
 
   try {
     await fsPromises.writeFile('Text_ER_chats.json', jsonChats);
-    return NextResponse.json({ message: 'Chats saved successfully' });
+    return NextResponse.json({ result: 'Chats saved successfully' });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: 'Error saving chats' }, { status: 500 });
+    return NextResponse.json({ result: 'Error saving chats' }, { status: 500 });
   }
 
  
@@ -36,7 +36,7 @@ export async function GET(request:Request) {
         return NextResponse.json(chats);
       } catch (error) {
         console.error(error);
-        return NextResponse.json({ message: 'Error retrieving chats' }, { status: 500 });
+        return NextResponse.json({ result: 'Error retrieving chats' }, { status: 500 });
       }
      
   }
