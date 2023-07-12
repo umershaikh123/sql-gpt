@@ -18,26 +18,6 @@ import {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div className=" text-white text-xl">Home LAYOUT</div>
-      <Typography
-        variant="h5"
-        noWrap
-        component="a"
-        href="/"
-        sx={{
-          mr: 5,
-          display: { xs: 'none', md: 'flex' },
-          fontFamily: 'worksans',
-          fontWeight: 800,
-
-          letterSpacing: '.2rem',
-          color: 'white',
-          textDecoration: 'none',
-        }}
-      >
-        SQL-GPT
-      </Typography>
-
       <>{children}</>
     </>
   )

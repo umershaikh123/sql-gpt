@@ -6,6 +6,8 @@ import * as React from 'react'
 import { useState } from 'react'
 import { pink } from '@mui/material/colors'
 import Radio from '@mui/material/Radio'
+import { SignUp } from '@/components/SignUp'
+import { Login } from '@/components/Login'
 
 const primary = `#FF4081`
 const secondary = `#070204`
@@ -70,19 +72,10 @@ export default function Page() {
   })
 
   return (
-    <html lang="en">
-      <head>
-        <title>SQL GPT</title>
-        <link
-          href="/Images/vercel.svg"
-          rel="apple-touch-icon"
-          sizes="180x180"
-        />
-      </head>
-      <body>
-        <h1 className="text-3xl ">Login Page</h1>
-      </body>
-    </html>
+    <>
+      {/* <SignUp /> */}
+      <Login />
+    </>
   )
 }
 
