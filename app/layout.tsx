@@ -1,6 +1,7 @@
 import { Navbar } from '../components/Navbar'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import { UserProvider } from '@auth0/nextjs-auth0/client'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,12 +21,14 @@ export default function RootLayout({
         <title>SQL GPT</title>
         {/* <link href="/Images/vercel.svg" sizes="180x180" /> */}
       </head>
-      <body className={inter.className}>
-        <div className=" container mx-auto">
-          <Navbar />
-        </div>
-        <>{children}</>
-      </body>
+      <UserProvider>
+        <body className={inter.className}>
+          <div className=" container mx-auto">
+            <Navbar />
+          </div>
+          <>{children}</>
+        </body>
+      </UserProvider>
     </html>
   )
 }

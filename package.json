@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.0.0-beta.3",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.4",
@@ -19,13 +20,17 @@
     "@types/react-dom": "18.2.6",
     "ai": "^2.1.17",
     "autoprefixer": "10.4.14",
+    "child_process": "^1.0.2",
     "dotenv": "^16.3.1",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.8",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "langchain": "^0.0.106",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.5.1",
     "next": "13.4.8",
+    "next-auth": "^4.22.1",
     "openai-edge": "^1.2.0",
     "postcss": "8.4.24",
     "react": "18.2.0",
@@ -35,6 +40,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/mysql": "^2.15.21",
     "@types/uuid": "^9.0.2"
   }
 }

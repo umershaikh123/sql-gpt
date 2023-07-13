@@ -8,6 +8,7 @@ import { pink } from '@mui/material/colors'
 import Radio from '@mui/material/Radio'
 import { SignUp } from '@/components/SignUp'
 import { Login } from '@/components/Login'
+import { Auth } from '@/components/auth'
 
 const primary = `#FF4081`
 const secondary = `#070204`
@@ -74,7 +75,8 @@ export default function Page() {
   return (
     <>
       {/* <SignUp /> */}
-      <Login />
+      {/* <Login /> */}
+      <Auth />
     </>
   )
 }

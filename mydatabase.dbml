@@ -1,0 +1,42 @@
+Table "Employee" {
+  "employee_id" INT [pk]
+  "first_name" VARCHAR(50)
+  "last_name" VARCHAR(50)
+}
+
+Table "Customer" {
+  "customer_id" INT [pk]
+  "first_name" VARCHAR(50)
+  "last_name" VARCHAR(50)
+}
+
+Table "Part" {
+  "part_id" INT [pk]
+  "part_name" VARCHAR(50)
+  "price" FLOAT
+  "quantity_in_stock" INT
+}
+
+Table "Order" {
+  "order_id" INT [pk]
+  "customer_id" INT
+  "employee_id" INT
+  "date_of_receipt" DATE
+  "expected_ship_date" DATE
+  "actual_ship_date" DATE
+}
+
+Table "OrderPart" {
+  "order_part_id" INT [pk]
+  "order_id" INT
+  "part_id" INT
+  "quantity" INT
+}
+
+Ref:"Customer"."customer_id" < "Order"."customer_id"
+
+Ref:"Employee"."employee_id" < "Order"."employee_id"
+
+Ref:"Order"."order_id" < "OrderPart"."order_id"
+
+Ref:"Part"."part_id" < "OrderPart"."part_id"

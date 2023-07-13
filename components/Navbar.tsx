@@ -60,7 +60,17 @@ export const Navbar = () => {
         >
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+              {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+              <Avatar
+                alt="profile"
+                src="/Images/ChatGPT_logo.svg"
+                sx={{
+                  width: '35px',
+                  height: '35px',
+                  display: { xs: 'none', md: 'flex' },
+                  mr: 1,
+                }}
+              />
               <Typography
                 variant="h5"
                 noWrap
@@ -136,7 +146,17 @@ export const Navbar = () => {
                   ))}
                 </Menu>
               </Box>
-              <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+              {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+              <Avatar
+                alt="profile"
+                src="/Images/ChatGPT_logo.svg"
+                sx={{
+                  width: '35px',
+                  height: '35px',
+                  display: { xs: 'flex', md: 'none' },
+                  mr: 1,
+                }}
+              />
               <Typography
                 variant="h5"
                 noWrap
