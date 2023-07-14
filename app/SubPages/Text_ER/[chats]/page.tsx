@@ -102,7 +102,7 @@ const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit, setMessages } =
     useChat()
   const [isLoaded, setIsLoaded] = useState(false)
-
+  const [formattedSqlCode, setFormattedSqlCode] = useState('')
   const params = useParams()
   const chatId = params.chats
 
@@ -115,6 +115,17 @@ const Chat = () => {
         const chat = chats.find(chat => chat.id === chatId)
 
         console.log('chat.messages ', chat.messages.Messages)
+        // console.log('chat.content ', chat.messages.Messages[0].content)
+        // const userMessage = chat.messages.Messages.find(
+        //   message => message.role === 'user'
+        // )
+        // if (userMessage) {
+        //   const userMessageContent = userMessage.content
+        //   console.log(userMessageContent)
+        // } else {
+        //   console.log('No user message found in chat messages.')
+        // }
+
         if (chat && chat.messages && chat.messages.Messages) {
           setMessages(chat.messages.Messages)
         }
@@ -138,6 +149,17 @@ const Chat = () => {
 
     setMessages(messages)
     await postMessage(chatId, messages)
+
+    await fetch('/api/format')
+      .then(response => response.json())
+      .then(data => {
+        // Set the formatted SQL code in the state
+        setFormattedSqlCode(data.sqlCode)
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error(error)
+      })
   }
 
   return (
@@ -220,6 +242,7 @@ const Chat = () => {
 
                       <div className=" w-full   leading-relaxed text-sm   font-medium">
                         {m.content}
+                        {formattedSqlCode && <>{formattedSqlCode}</>}
                       </div>
                     </Stack>
                   </div>

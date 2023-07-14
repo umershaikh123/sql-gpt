@@ -23,22 +23,6 @@ import { ChatHistory } from '@/components/chatHistory'
 import { ChatModel } from '@/components/chatModel'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  fetch('/api/mysqlDB')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to fetch data')
-      }
-      return response.json()
-    })
-    .then(data => {
-      // Handle the response data
-      console.log(data)
-    })
-    .catch(error => {
-      // Handle any errors
-      console.error(error)
-    })
-
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -100,3 +84,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </>
   )
 }
+
+// fetch('/api/mysqlDB')
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error('Failed to fetch data')
+//     }
+//     return response.json()
+//   })
+//   .then(data => {
+//     // Handle the response data
+//     console.log(data)
+//   })
+//   .catch(error => {
+//     // Handle any errors
+//     console.error(error)
+//   })

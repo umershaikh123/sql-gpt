@@ -9,10 +9,10 @@ const NavList = [
         link : "/SubPages/Text_ER"
     },
 
-    {
-        pageName: "ER-SQL",
-        link : "/SubPages/ER_SQL"
-    },
+    // {
+    //     pageName: "ER-SQL",
+    //     link : "/SubPages/ER_SQL"
+    // },
 
     {
         pageName: "CSV-SQL",

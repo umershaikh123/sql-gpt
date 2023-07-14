@@ -28,6 +28,17 @@ export async function POST(req: Request ,  params: { params: { chatid: string } 
    
     console.log("M1" , messages);
   
+        //     console.log('text api chat.content ', messages.Messages[0].content)
+        // const userMessage = messages.Messages.find(
+        //   message => message.role === 'user'
+        // )
+        // if (userMessage) {
+        //   const userMessageContent = userMessage.content
+        //   console.log(userMessageContent)
+        // } else {
+        //   console.log('No user message found in chat messages.')
+        // }
+
   
   const chatsFilePath = './Text_ER_chats.json'; // Path to the chats.json file
 
