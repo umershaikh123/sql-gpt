@@ -178,13 +178,14 @@ function Auth() {
                   Log In
                 </Button>
 
-                <Button
+                {/* <Button
                   variant="outlined"
                   color="primary"
+                  href="/api/auth/signup"
                   sx={{ minWidth: '1rem', width: '7rem' }}
                 >
                   Sign Up
-                </Button>
+                </Button> */}
               </Stack>
             </Stack>
           </Box>
