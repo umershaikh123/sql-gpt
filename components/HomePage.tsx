@@ -22,9 +22,9 @@ function HomePage() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <div className="container mx-auto  flex flex-col justify-center items-center py-[4rem]">
-          <div className="flex flex-col space-y-[7rem]  mt-[0rem] justify-center items-center">
-            <div className="flex flex-col w-1/2 space-y-6 lead">
+        <div className="container mx-auto  flex flex-col justify-center items-center py-[4rem] ">
+          <div className="flex flex-col space-y-[7rem]  mt-[0rem] justify-center items-center ">
+            <div className="flex flex-col w-1/2 space-y-6 lead bg-[#0b0407] px-8 py-6">
               <Typography
                 variant="h4"
                 noWrap
@@ -121,7 +121,7 @@ function HomePage() {
               </Typography>
             </div> */}
 
-            <div className="flex flex-col w-1/2 space-y-6 lead">
+            <div className="flex flex-col w-1/2 space-y-6 lead px-8 py-6 bg-[#0b0407]">
               <Typography
                 variant="h4"
                 noWrap

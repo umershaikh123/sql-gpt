@@ -22,6 +22,29 @@ import { Children } from 'react'
 import { ChatHistory } from '@/components/chatHistory'
 import { ChatModel } from '@/components/chatModel'
 
+import anime from 'animejs/lib/anime.es.js'
+import { useState, useRef, useEffect } from 'react'
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  const Ref = useRef<any>(null)
+
+  useEffect(() => {
+    const element = Ref.current
+
+    if (element) {
+      anime({
+        targets: element,
+
+        opacity: [0, 1],
+        duration: 700,
+        easing: 'easeOutSine',
+      })
+    }
+  }, [])
+
+  return (
+    <>
+      <div ref={Ref}>{children}</div>
+    </>
+  )
 }
