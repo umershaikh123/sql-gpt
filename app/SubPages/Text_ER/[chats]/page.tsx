@@ -44,7 +44,7 @@ const CssTextField = styled(TextField)({
   '& .MuiInputBase-input': {
     color: theme.palette.primary.main,
     height: '3rem',
-    width: '60rem',
+    width: '70ch',
   },
 
   '& label.Mui-focused': {
@@ -173,7 +173,7 @@ const Chat = () => {
           sx={{
             py: 2,
 
-            height: '40rem',
+            height: '37rem',
             overflow: 'auto',
           }}
         >
@@ -181,14 +181,17 @@ const Chat = () => {
           <Stack
             direction="column"
             justifyContent="flex-start"
-            alignItems="center"
+            alignItems="start"
             spacing={3}
             sx={{ overflow: 'auto' }}
           >
             {messages.map(m => (
-              <div key={m.id}>
+              <div
+                key={m.id}
+                className=" justify-start bg-[#1A0B11]  w-[70ch] "
+              >
                 {m.role === 'user' ? (
-                  <div className=" w-[65rem]">
+                  <div className="  ">
                     <Stack
                       direction="row"
                       alignItems="center"
@@ -198,9 +201,6 @@ const Chat = () => {
                         py: 1.5,
 
                         px: 2,
-
-                        width: '100%',
-                        backgroundColor: '#1A0B11',
                       }}
                     >
                       <div className=" ">
@@ -217,7 +217,7 @@ const Chat = () => {
                     </Stack>
                   </div>
                 ) : (
-                  <div className=" w-[65rem]">
+                  <div className="  ">
                     <Stack
                       direction="row"
                       alignItems="center"
@@ -227,7 +227,6 @@ const Chat = () => {
                         px: 2,
                         py: 1.5,
 
-                        width: '100%',
                         // backgroundColor: theme.palette.chatBackground.main,
                         backgroundColor: '#140F11',
                       }}

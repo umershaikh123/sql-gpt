@@ -37,7 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               flexGrow: 0,
               flexBasis: '20rem',
               flexShrink: 10,
-              height: '80vh',
+              height: '75vh',
 
               background: theme.palette.secondary.main,
             }}
@@ -48,17 +48,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Box
             sx={{
               flexGrow: 2,
-              flexBasis: '60rem',
+              flexBasis: '70rem',
               flexShrink: 3,
 
-              height: '80vh',
+              height: '75vh',
               background: theme.palette.secondary.main,
             }}
           >
             <Typography
               variant="h3"
               sx={{
-                fontSize: '32px',
+                fontSize: '24px',
                 whiteSpace: 'nowrap',
               }}
             >
@@ -72,7 +72,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               flexBasis: '20rem',
               flexShrink: 10,
 
-              height: '80vh',
+              height: '75vh',
               background: theme.palette.secondary.main,
             }}
           >

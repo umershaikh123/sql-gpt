@@ -42,7 +42,7 @@ const CssTextField = styled(TextField)({
   '& .MuiInputBase-input': {
     color: theme.palette.primary.main,
     height: '3rem',
-    width: '60rem',
+    width: '70ch',
   },
 
   '& label.Mui-focused': {
@@ -174,9 +174,12 @@ const Chat = () => {
             sx={{ overflow: 'auto' }}
           >
             {messages.map(m => (
-              <div key={m.id}>
+              <div
+                key={m.id}
+                className=" justify-start bg-[#1A0B11]  w-[70ch] "
+              >
                 {m.role === 'user' ? (
-                  <div className=" w-[65rem]">
+                  <div className="  ">
                     <Stack
                       direction="row"
                       alignItems="center"
@@ -205,7 +208,7 @@ const Chat = () => {
                     </Stack>
                   </div>
                 ) : (
-                  <div className=" w-[65rem]">
+                  <div className=" ">
                     <Stack
                       direction="row"
                       alignItems="center"

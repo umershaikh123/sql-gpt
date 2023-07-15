@@ -44,7 +44,7 @@ export const ChatHistory: React.FC<ChatHistoryProps> = ({ url, type }) => {
           sx={{
             p: 3,
 
-            height: '43rem',
+            height: '42rem',
             overflow: 'auto',
           }}
         >
