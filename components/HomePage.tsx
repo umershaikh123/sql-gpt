@@ -17,13 +17,11 @@ import {
 
 import { ThemeProvider } from '@mui/material'
 import { theme } from '@/theme/theme'
-import HomePage from '@/components/HomePage'
 
-export default function Page() {
+function HomePage() {
   return (
     <>
-      <HomePage />
-      {/* <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <div className="container mx-auto  flex flex-col justify-center items-center py-[4rem]">
           <div className="flex flex-col space-y-[7rem]  mt-[0rem] justify-center items-center">
             <div className="flex flex-col w-1/2 space-y-6 lead">
@@ -65,9 +63,22 @@ export default function Page() {
                 data model, saving you time and effort in the database design
                 process
               </Typography>
+
+              <Button
+                variant="outlined"
+                color="primary"
+                href="/SubPages/Text_ER"
+                sx={{
+                  fontSize: '14px',
+                  textTransform: 'capitalize',
+                  maxWidth: '8rem',
+                }}
+              >
+                Get Started
+              </Button>
             </div>
 
-            <div className="flex flex-col w-1/2 space-y-6 lead">
+            {/* <div className="flex flex-col w-1/2 space-y-6 lead">
               <Typography
                 variant="h4"
                 noWrap
@@ -108,7 +119,7 @@ export default function Page() {
                 development by leveraging the power of our ER diagram to SQL
                 conversion feature.
               </Typography>
-            </div>
+            </div> */}
 
             <div className="flex flex-col w-1/2 space-y-6 lead">
               <Typography
@@ -150,10 +161,25 @@ export default function Page() {
                 hassle. Say goodbye to manual data entry and let our tool handle
                 the heavy lifting for you
               </Typography>
+
+              <Button
+                variant="outlined"
+                color="primary"
+                href="/SubPages/CSV_SQL"
+                sx={{
+                  fontSize: '14px',
+                  textTransform: 'capitalize',
+                  maxWidth: '8rem',
+                }}
+              >
+                Get Started
+              </Button>
             </div>
           </div>
         </div>
-      </ThemeProvider> */}
+      </ThemeProvider>
     </>
   )
 }
+
+export default HomePage

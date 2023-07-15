@@ -21,12 +21,14 @@ import { theme } from '@/theme/theme'
 import { Children } from 'react'
 import { ChatHistory } from '@/components/chatHistory'
 import { ChatModel } from '@/components/chatModel'
+import HomePage from '@/components/HomePage'
 
 export default function Page() {
-  return (
-    <>
-      <>
-        {/* <ThemeProvider theme={theme}>
+  return <></>
+}
+
+{
+  /* <ThemeProvider theme={theme}>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -73,8 +75,5 @@ export default function Page() {
               <ChatModel />
             </Box>
           </Stack>
-        </ThemeProvider> */}
-      </>
-    </>
-  )
+        </ThemeProvider> */
 }

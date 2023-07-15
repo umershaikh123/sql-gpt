@@ -99,20 +99,27 @@ const CssTextField = styled(TextField)({
 
 function Auth() {
   return (
-    <ThemeProvider theme={theme}>
-      <Container maxWidth="lg">
-        <Stack justifyContent="center" alignItems="center">
-          {/* <SingleColumnLayout style={{ maxWidth: 600 }}> */}
-          {/* <Box className="mt-16 border-2 border-emerald rounded-xl" sx={{ px: 10, py: 4, boxShadow: '0px 4px 4px #40B1D4', width: '50rem' }}> */}
-
+    <Container maxWidth="xl" className=" bg-[#0b0407]">
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        sx={{ position: 'relative' }}
+      >
+        {/* <SingleColumnLayout style={{ maxWidth: 600 }}> */}
+        {/* <Box className="mt-16 border-2 border-emerald rounded-xl" sx={{ px: 10, py: 4, boxShadow: '0px 4px 4px #40B1D4', width: '50rem' }}> */}
+        <ThemeProvider theme={theme}>
           <Box
-            className="   rounded-xl  "
+            className="rounded-xl"
             sx={{
               px: 10,
               py: 4,
-              mt: 20,
+              top: '30vh',
+
+              position: 'absolute',
+              // transform: 'translate(50%, 50%)',
+              // transform: 'translateY(50%)',
               maxWidth: '50rem',
-              background: theme.palette.secondary.main,
+              background: theme.palette.chatBackground.main,
             }}
           >
             <Stack
@@ -172,7 +179,7 @@ function Auth() {
                 <Button
                   variant="outlined"
                   color="primary"
-                  href="/api/auth/login"
+                  href="/api/auth/login?returnTo=/Home"
                   sx={{ minWidth: '1rem', width: '7rem' }}
                 >
                   Log In
@@ -189,9 +196,9 @@ function Auth() {
               </Stack>
             </Stack>
           </Box>
-        </Stack>
-      </Container>
-    </ThemeProvider>
+        </ThemeProvider>
+      </Stack>
+    </Container>
   )
 }
 

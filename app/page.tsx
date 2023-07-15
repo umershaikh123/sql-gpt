@@ -9,80 +9,77 @@ import Radio from '@mui/material/Radio'
 import { SignUp } from '@/components/SignUp'
 import { Login } from '@/components/Login'
 import { Auth } from '@/components/auth'
-
-const primary = `#FF4081`
-const secondary = `#070204`
-const chatBackground = `#0D0609`
-const border = `#92294C`
+import { useUser } from '@auth0/nextjs-auth0/client'
+import { UserProvider } from '@auth0/nextjs-auth0/client'
+import { Navbar } from '@/components/Navbar'
+import { UserProfile } from '@auth0/nextjs-auth0/client'
 
 export default function Page() {
-  const [selectedValue, setSelectedValue] = React.useState('a')
-  const colorSchemes = [
-    {
-      name: 'Default',
-      primary: '#FF4081',
-      secondary: '#070204',
-      background: '#000000',
-      chatBackground: '#0D0609',
-      border: '#92294C',
-    },
-
-    {
-      name: 'Hacker',
-      primary: '#40FF53',
-      secondary: '#020703',
-      chatBackground: '#060C06',
-      border: '#01FFA4',
-    },
-
-    {
-      name: 'Blue',
-      primary: '#00A3FF',
-      secondary: '#020307',
-      chatBackground: '#06070C',
-      border: '#00D1FF',
-    },
-
-    {
-      name: '',
-      primary: '#',
-      secondary: '#',
-      chatBackground: '#',
-      border: '#',
-    },
-
-    {
-      name: '',
-      primary: '#',
-      secondary: '#',
-      chatBackground: '#',
-      border: '#',
-    },
-  ]
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(event.target.value)
-  }
-
-  const controlProps = (item: string) => ({
-    checked: selectedValue === item,
-    onChange: handleChange,
-    value: item,
-    name: 'color-radio-button-demo',
-    inputProps: { 'aria-label': item },
-  })
-
   return (
     <>
       {/* <SignUp /> */}
       {/* <Login /> */}
-      <Auth />
     </>
   )
 }
 
-{
-  /* <Radio
+// const colorSchemes = [
+//   {
+//     name: 'Default',
+//     primary: '#FF4081',
+//     secondary: '#070204',
+//     background: '#000000',
+//     chatBackground: '#0D0609',
+//     border: '#92294C',
+//   },
+
+//   {
+//     name: 'Hacker',
+//     primary: '#40FF53',
+//     secondary: '#020703',
+//     chatBackground: '#060C06',
+//     border: '#01FFA4',
+//   },
+
+//   {
+//     name: 'Blue',
+//     primary: '#00A3FF',
+//     secondary: '#020307',
+//     chatBackground: '#06070C',
+//     border: '#00D1FF',
+//   },
+
+//   {
+//     name: '',
+//     primary: '#',
+//     secondary: '#',
+//     chatBackground: '#',
+//     border: '#',
+//   },
+
+//   {
+//     name: '',
+//     primary: '#',
+//     secondary: '#',
+//     chatBackground: '#',
+//     border: '#',
+//   },
+// ]
+
+// const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//   setSelectedValue(event.target.value)
+// }
+
+// const controlProps = (item: string) => ({
+//   checked: selectedValue === item,
+//   onChange: handleChange,
+//   value: item,
+//   name: 'color-radio-button-demo',
+//   inputProps: { 'aria-label': item },
+// })
+
+// {
+/* <Radio
           {...controlProps('a')}
           sx={{
             color: `${primary}`,
@@ -127,4 +124,4 @@ export default function Page() {
             },
           }}
         /> */
-}
+// }
