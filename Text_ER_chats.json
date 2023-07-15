@@ -38,34 +38,5 @@
         }
       ]
     }
-  },
-  {
-    "id": "3e0fdf6e-54cc-4b61-940f-9de72ccf62fe",
-    "title": "Chat 3e0fdf6e-54cc-4b61-940f-9de72ccf62fe",
-    "messages": []
-  },
-  {
-    "id": "19e37054-0adc-4081-a561-7f3fb3c09d48",
-    "title": "Chat 19e37054-0adc-4081-a561-7f3fb3c09d48",
-    "messages": []
-  },
-  {
-    "id": "ad5a70d5-fd3f-417d-a64c-c24257d33966",
-    "title": "Chat ad5a70d5-fd3f-417d-a64c-c24257d33966",
-    "messages": []
-  },
-  {
-    "id": "ab3681f9-5f8b-4123-81cc-edf6efd34a78",
-    "title": "Chat ab3681f9-5f8b-4123-81cc-edf6efd34a78",
-    "messages": {
-      "Messages": []
-    }
-  },
-  {
-    "id": "1dd4c47b-1d10-4ec1-96c7-57a7ad38a223",
-    "title": "Chat 1dd4c47b-1d10-4ec1-96c7-57a7ad38a223",
-    "messages": {
-      "Messages": []
-    }
   }
 ]

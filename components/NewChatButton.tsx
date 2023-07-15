@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Button, Typography, ButtonGroup } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { v4 as uuidv4 } from 'uuid'
@@ -6,7 +6,8 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import { promises as fsPromises } from 'fs'
-
+import anime from 'animejs/lib/anime.es.js'
+import { motion } from 'framer-motion'
 interface NewChatButtonProps {
   url: string
 }
@@ -202,6 +203,22 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
     fetchChats()
   }, [])
 
+  const Ref = useRef<any>(null)
+
+  useEffect(() => {
+    const element = Ref.current
+
+    if (element) {
+      anime({
+        targets: element,
+
+        opacity: [0, 1],
+        duration: 700,
+        easing: 'easeOutSine',
+      })
+    }
+  }, [])
+
   const handleNewChat = async (): Promise<void> => {
     const newChatId = generateUniqueChatId()
     const newChat: Chat = {
@@ -270,45 +287,51 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
 
       {TextERchats.map(chat => (
         <>
-          <div key={chat.id}>
-            <ButtonGroup
-              disableElevation
-              variant="outlined"
-              aria-label="Disabled elevation buttons"
-            >
-              <Button
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div key={chat.id}>
+              <ButtonGroup
+                disableElevation
                 variant="outlined"
-                color="primary"
-                startIcon={<ChatBubbleOutlineOutlinedIcon />}
-                onClick={() => router.push(`/SubPages/${url}/${chat.id}`)}
-                sx={{
-                  textTransform: 'capitalize',
-                }}
+                aria-label="Disabled elevation buttons"
               >
-                <Typography
-                  variant="subtitle2"
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<ChatBubbleOutlineOutlinedIcon />}
+                  onClick={() => router.push(`/SubPages/${url}/${chat.id}`)}
                   sx={{
-                    maxWidth: '7rem',
-                    fontSize: '12px',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
+                    textTransform: 'capitalize',
                   }}
                 >
-                  {chat.id}
-                </Typography>
-              </Button>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      maxWidth: '7rem',
+                      fontSize: '12px',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {chat.id}
+                  </Typography>
+                </Button>
 
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={() => handleRemoveChat(chat.id)}
-                sx={{ borderLeft: 'none', width: '0.5rem' }}
-              >
-                <DeleteOutlineOutlinedIcon />
-              </Button>
-            </ButtonGroup>
-          </div>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => handleRemoveChat(chat.id)}
+                  sx={{ borderLeft: 'none', width: '0.5rem' }}
+                >
+                  <DeleteOutlineOutlinedIcon />
+                </Button>
+              </ButtonGroup>
+            </div>
+          </motion.div>
         </>
       ))}
     </>
@@ -418,45 +441,51 @@ const CsvSQL: React.FC<NewChatButtonProps> = ({ url }) => {
 
       {CSV_SQL_chats.map(chat => (
         <>
-          <div key={chat.id}>
-            <ButtonGroup
-              disableElevation
-              variant="outlined"
-              aria-label="Disabled elevation buttons"
-            >
-              <Button
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div key={chat.id}>
+              <ButtonGroup
+                disableElevation
                 variant="outlined"
-                color="primary"
-                startIcon={<ChatBubbleOutlineOutlinedIcon />}
-                onClick={() => router.push(`/SubPages/${url}/${chat.id}`)}
-                sx={{
-                  textTransform: 'capitalize',
-                }}
+                aria-label="Disabled elevation buttons"
               >
-                <Typography
-                  variant="subtitle2"
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<ChatBubbleOutlineOutlinedIcon />}
+                  onClick={() => router.push(`/SubPages/${url}/${chat.id}`)}
                   sx={{
-                    maxWidth: '7rem',
-                    fontSize: '12px',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
+                    textTransform: 'capitalize',
                   }}
                 >
-                  {chat.id}
-                </Typography>
-              </Button>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      maxWidth: '7rem',
+                      fontSize: '12px',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {chat.id}
+                  </Typography>
+                </Button>
 
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={() => handleRemoveChat(chat.id)}
-                sx={{ borderLeft: 'none', width: '0.5rem' }}
-              >
-                <DeleteOutlineOutlinedIcon />
-              </Button>
-            </ButtonGroup>
-          </div>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => handleRemoveChat(chat.id)}
+                  sx={{ borderLeft: 'none', width: '0.5rem' }}
+                >
+                  <DeleteOutlineOutlinedIcon />
+                </Button>
+              </ButtonGroup>
+            </div>
+          </motion.div>
         </>
       ))}
     </>
