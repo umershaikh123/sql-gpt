@@ -31,7 +31,8 @@ import InputAdornment from '@mui/material/InputAdornment'
 import Image from 'next/image'
 import { useState } from 'react'
 // import { Message } from 'ai/react'
-
+import { useUser } from '@auth0/nextjs-auth0/client'
+import { UserProvider } from '@auth0/nextjs-auth0/client'
 const mainPrimary = theme.palette.primary.main
 const darkGreen = theme.palette.border.main
 
@@ -44,7 +45,7 @@ const CssTextField = styled(TextField)({
   '& .MuiInputBase-input': {
     color: theme.palette.primary.main,
     height: '3rem',
-    width: '70ch',
+    width: '75ch',
   },
 
   '& label.Mui-focused': {
@@ -101,6 +102,8 @@ export const postMessage = async (ChatId: string, Messages: Message[]) => {
 const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit, setMessages } =
     useChat()
+
+  const { user, error, isLoading } = useUser()
   const [isLoaded, setIsLoaded] = useState(false)
   const [formattedSqlCode, setFormattedSqlCode] = useState('')
   const params = useParams()
@@ -164,7 +167,7 @@ const Chat = () => {
 
   return (
     <>
-      <Box sx={{ p: 4 }}>
+      <Box sx={{ px: 2, py: 2 }}>
         <Stack
           direction="column"
           alignItems="start"
@@ -173,7 +176,7 @@ const Chat = () => {
           sx={{
             py: 2,
 
-            height: '37rem',
+            height: '40rem',
             overflow: 'auto',
           }}
         >
@@ -188,7 +191,7 @@ const Chat = () => {
             {messages.map(m => (
               <div
                 key={m.id}
-                className=" justify-start bg-[#1A0B11]  w-[70ch] "
+                className=" justify-start bg-[#1A0B11]  w-[75ch] "
               >
                 {m.role === 'user' ? (
                   <div className="  ">
@@ -206,7 +209,8 @@ const Chat = () => {
                       <div className=" ">
                         <Avatar
                           alt="Remy Sharp"
-                          src={'/Images/profile.jpg'}
+                          // src={'/Images/profile.jpg'}
+                          src={user?.picture || '/Images/Customer.svg'}
                           sx={{ width: 40, height: 40 }}
                         />
                       </div>

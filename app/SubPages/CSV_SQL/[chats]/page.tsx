@@ -29,7 +29,8 @@ import InputAdornment from '@mui/material/InputAdornment'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { useCompletion, useChat } from 'ai/react'
-
+import { useUser } from '@auth0/nextjs-auth0/client'
+import { UserProvider } from '@auth0/nextjs-auth0/client'
 const mainPrimary = theme.palette.primary.main
 const darkGreen = theme.palette.border.main
 
@@ -112,6 +113,7 @@ const Messages: Message[] = [
 const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit, setMessages } =
     useChat()
+  const { user, error, isLoading } = useUser()
   const [isLoaded, setIsLoaded] = useState(false)
 
   const params = useParams()
@@ -174,10 +176,7 @@ const Chat = () => {
             sx={{ overflow: 'auto' }}
           >
             {messages.map(m => (
-              <div
-                key={m.id}
-                className=" justify-start bg-[#1A0B11]  w-[70ch] "
-              >
+              <div key={m.id} className=" justify-start bg-[#1A0B11]  w-[75ch]">
                 {m.role === 'user' ? (
                   <div className="  ">
                     <Stack
@@ -197,7 +196,7 @@ const Chat = () => {
                       <div className=" ">
                         <Avatar
                           alt="Remy Sharp"
-                          src={'/Images/profile.jpg'}
+                          src={user?.picture || '/Images/Customer.svg'}
                           sx={{ width: 40, height: 40 }}
                         />
                       </div>
