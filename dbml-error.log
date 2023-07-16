@@ -25,3 +25,107 @@ SyntaxError: Expected "IF" or valid table name but "`" found.
     at importHandler (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\import.js:25:27)
 {"start":{"offset":397,"line":20,"column":16},"end":{"offset":398,"line":20,"column":17}}
 
+2023-07-16T21:51:47.632Z
+Error: ENOENT: no such file or directory, stat 'I:\University\Coding\Web Development\sql-gpt\undefined'
+    at Object.statSync (node:fs:1615:3)
+    at validateFilePlugin (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\validatePlugins\validatePlugins.js:10:28)
+    at C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:31
+    at Array.every (<anonymous>)
+    at validateInputFilePaths (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:16)
+    at importHandler (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\import.js:21:39)
+    at Object.sql2dbml (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\index.js:27:23)
+    at Object.<anonymous> (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\bin\sql2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+
+2023-07-16T21:52:52.183Z
+Error: ENOENT: no such file or directory, stat 'I:\University\Coding\Web Development\sql-gpt\undefined'
+    at Object.statSync (node:fs:1615:3)
+    at validateFilePlugin (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\validatePlugins\validatePlugins.js:10:28)
+    at C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:31
+    at Array.every (<anonymous>)
+    at validateInputFilePaths (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:16)
+    at importHandler (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\import.js:21:39)
+    at Object.sql2dbml (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\index.js:27:23)
+    at Object.<anonymous> (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\bin\sql2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+
+2023-07-16T21:53:22.742Z
+Error: ENOENT: no such file or directory, stat 'I:\University\Coding\Web Development\sql-gpt\undefined'
+    at Object.statSync (node:fs:1615:3)
+    at validateFilePlugin (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\validatePlugins\validatePlugins.js:10:28)
+    at C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:31
+    at Array.every (<anonymous>)
+    at validateInputFilePaths (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:16)
+    at importHandler (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\import.js:21:39)
+    at Object.sql2dbml (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\index.js:27:23)
+    at Object.<anonymous> (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\bin\sql2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+
+2023-07-16T21:53:52.586Z
+Error: ENOENT: no such file or directory, stat 'I:\University\Coding\Web Development\sql-gpt\undefined'
+    at Object.statSync (node:fs:1615:3)
+    at validateFilePlugin (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\validatePlugins\validatePlugins.js:10:28)
+    at C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:31
+    at Array.every (<anonymous>)
+    at validateInputFilePaths (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:16)
+    at importHandler (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\import.js:21:39)
+    at Object.sql2dbml (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\index.js:27:23)
+    at Object.<anonymous> (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\bin\sql2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+
+2023-07-16T21:54:41.759Z
+Error: ENOENT: no such file or directory, stat 'I:\University\Coding\Web Development\sql-gpt\undefined'
+    at Object.statSync (node:fs:1615:3)
+    at validateFilePlugin (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\validatePlugins\validatePlugins.js:10:28)
+    at C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:31
+    at Array.every (<anonymous>)
+    at validateInputFilePaths (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:16)
+    at importHandler (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\import.js:21:39)
+    at Object.sql2dbml (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\index.js:27:23)
+    at Object.<anonymous> (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\bin\sql2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+
+2023-07-16T21:57:33.195Z
+Error: ENOENT: no such file or directory, stat 'I:\University\Coding\Web Development\sql-gpt\undefined'
+    at Object.statSync (node:fs:1615:3)
+    at validateFilePlugin (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\validatePlugins\validatePlugins.js:10:28)
+    at C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:31
+    at Array.every (<anonymous>)
+    at validateInputFilePaths (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:16)
+    at importHandler (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\import.js:21:39)
+    at Object.sql2dbml (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\index.js:27:23)
+    at Object.<anonymous> (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\bin\sql2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+
+2023-07-16T21:57:54.978Z
+Error: ENOENT: no such file or directory, stat 'I:\University\Coding\Web Development\sql-gpt\undefined'
+    at Object.statSync (node:fs:1615:3)
+    at validateFilePlugin (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\validatePlugins\validatePlugins.js:10:28)
+    at C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:31
+    at Array.every (<anonymous>)
+    at validateInputFilePaths (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:16)
+    at importHandler (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\import.js:21:39)
+    at Object.sql2dbml (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\index.js:27:23)
+    at Object.<anonymous> (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\bin\sql2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+
+2023-07-16T21:58:18.284Z
+Error: ENOENT: no such file or directory, stat 'I:\University\Coding\Web Development\sql-gpt\sql-file-1689544698021.sql'
+    at Object.statSync (node:fs:1615:3)
+    at validateFilePlugin (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\validatePlugins\validatePlugins.js:10:28)
+    at C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:31
+    at Array.every (<anonymous>)
+    at validateInputFilePaths (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\utils.js:21:16)
+    at importHandler (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\import.js:21:39)
+    at Object.sql2dbml (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\lib\cli\index.js:27:23)
+    at Object.<anonymous> (C:\Users\BN GAMING\AppData\Roaming\nvm\v18.15.0\node_modules\@dbml\cli\bin\sql2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+

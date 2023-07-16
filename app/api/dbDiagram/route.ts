@@ -13,8 +13,17 @@ const outputFilePath = 'mydatabase.dbml';
 export async function POST(req: Request) {
   const resp= await req.json()
 
-  const path  =  resp.filePath
-  const output = `ER-file-${Date.now()}.dbml`;
+  const path  =  `Files/SQL_Files/${resp}`
+  const folderPath = 'Files/ER_Files'; // Replace with the desired folder path
+  const fileName = `ER-file-${Date.now()}.dbml`;
+  const output = `${folderPath}/${fileName}`;
+
+  console.log("path =" , path);
+  
+  
+  // const output = `ER-file-${Date.now()}.dbml`;
+
+  
 
   const command = `sql2dbml --mysql ${path} -o ${output}`;
 
@@ -33,6 +42,8 @@ export async function POST(req: Request) {
     console.log('sql2dbml command executed successfully.');
     console.log(`Output file generated at: ${output}`);
   });
+
+  return NextResponse.json({ output});
 
   // const command2 =  `dbdocs build mydatabase.dbml --project demo`
 

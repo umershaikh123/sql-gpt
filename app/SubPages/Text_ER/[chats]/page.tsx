@@ -108,11 +108,12 @@ async function generateSqlFile(messages: any, chatID: any) {
     }
 
     const data = await response.json()
-    const { message, fileName } = data
+    const { fileName } = data
 
     // Display success message or handle the generated SQL file as needed
-    console.log(message)
+
     console.log('Generated SQL file:', fileName)
+    return fileName
   } catch (error) {
     console.error(error)
     // Handle error
@@ -136,6 +137,34 @@ export const postMessage = async (ChatId: string, Messages: Message[]) => {
     }
   } catch (error) {
     console.log('Error saving messages')
+  }
+}
+
+async function generateERFile(filePath: any) {
+  try {
+    // Make an HTTP POST request to the API endpoint
+    const response = await fetch('/api/dbDiagram', {
+      method: 'POST',
+      body: JSON.stringify(filePath), // Replace `messages` with your actual messages data
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to generate SQL file.')
+    }
+
+    const data = await response.json()
+    const { output } = data
+
+    // Display success message or handle the generated SQL file as needed
+
+    console.log('Generated ER file:', output)
+    return output
+  } catch (error) {
+    console.error(error)
+    // Handle error
   }
 }
 
@@ -202,7 +231,8 @@ const Chat = () => {
 
     setMessages(messages)
     await postMessage(chatId, messages)
-    await generateSqlFile(messages, chatId)
+    const sqlFileName = await generateSqlFile(messages, chatId)
+    await generateERFile(sqlFileName)
 
     // await fetch('/api/format')
     //   .then(response => response.json())

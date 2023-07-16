@@ -162,7 +162,7 @@ export async function POST(req:Request) {
 
     if (chat) {
       let lastAIMessageContent = null;
-      console.log("messages.length" , messages.length);
+      // console.log("messages.length" , messages.length);
       
     for (let i = messages.length - 1; i >= 0; i--) {
       if (messages[i].role === 'assistant') {
@@ -171,12 +171,12 @@ export async function POST(req:Request) {
       }
     }
 
-    console.log("lastAIMessageContent =" , lastAIMessageContent);
+    // console.log("lastAIMessageContent =" , lastAIMessageContent);
     
 
       // Extract SQL code from the conversation
       const sqlCode = extractSqlCode(lastAIMessageContent);
-      console.log(" sqlCode " , sqlCode);
+      // console.log(" sqlCode " , sqlCode);
       // Generate a timestamp-based filename for the SQL file
       // const fileName = `sql-file-${Date.now()}.sql`;
  
@@ -187,13 +187,9 @@ const filePath = `${folderPath}/${fileName}`;
       // Write the SQL code to the file
         await fsPromises.writeFile(filePath, sqlCode);
   
-      NextResponse.json({ message: 'SQL file generated successfully.', fileName });
+     return NextResponse.json({ fileName});
 
-
-    //   const requestBody = {
-    //     file,
-    //     filePath
-    //   }
+ 
     
     //   try {
     //  const response =  await fetch('/api/dbDiagram', {
