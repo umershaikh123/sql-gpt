@@ -25,7 +25,7 @@ export async function GET(request:Request) {
   try {
     const fileData = await fsPromises.readFile('Text_ER_chats.json', 'utf-8');
     const chats: Chat[] = JSON.parse(fileData);
-    console.log("chats " , chats);
+    
     
     return NextResponse.json(chats);
   } catch (error) {

@@ -25,8 +25,7 @@ export async function POST(req: Request ,  params: { params: { chatid: string } 
   try {
     const chatId = params.params.chatid;
     const  messages   = await req.json();
-   
-    console.log("M1" , messages);
+ 
   
         //     console.log('text api chat.content ', messages.Messages[0].content)
         // const userMessage = messages.Messages.find(
@@ -56,7 +55,7 @@ console.log("chatsData" , chatsData);
   if (chatIndex !== -1) {
     // Update the messages for the chat
     chatsData[chatIndex].messages = messages;
-    console.log(" chatsData[chatIndex].messages" ,  chatsData[chatIndex].messages);
+ 
     // Write the updated chats data back to the JSON file
     
      

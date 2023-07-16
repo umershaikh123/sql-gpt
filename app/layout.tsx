@@ -49,7 +49,7 @@ export function Index({ children }: IndexProps) {
       })
     }
   }, [])
-  console.log('user = ', user)
+  // console.log('user = ', user)
 
   // Auth loading
   if (isLoading) {

@@ -17,7 +17,7 @@ import {
   Paper,
   FormGroup,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
+// import { styled } from '@mui/material/styles'
 import { ThemeProvider } from '@mui/material'
 import { theme } from '@/theme/theme'
 import { Children, useEffect } from 'react'
@@ -33,6 +33,14 @@ import { useState } from 'react'
 // import { Message } from 'ai/react'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
+// import SqlFormatter from 'sql-formatter'
+const SqlFormatter = require('sql-formatter')
+
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { docco, monokai } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { styled } from '@mui/material/styles'
+import { codeStyle, codeStyle2 } from '@/utils/codeStyle'
+
 const mainPrimary = theme.palette.primary.main
 const darkGreen = theme.palette.border.main
 
@@ -45,7 +53,7 @@ const CssTextField = styled(TextField)({
   '& .MuiInputBase-input': {
     color: theme.palette.primary.main,
     height: '3rem',
-    width: '75ch',
+    width: '74ch',
   },
 
   '& label.Mui-focused': {
@@ -102,9 +110,79 @@ export const postMessage = async (ChatId: string, Messages: Message[]) => {
 const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit, setMessages } =
     useChat()
+  // useChat({ api: '/api/completion' })
+  const userStyle = {
+    ...monokai,
+    /* Add any custom CSS properties here */
+    // For example, to change the background color:
+    background: '#272822',
+    // To change the text color:
+    color: '#F8F8F2',
+    // To change the color of specific elements, such as keywords:
+    'span.keyword': {
+      color: '#F92672',
+    },
+    // To change the color of comments:
+    'span.comment': {
+      color: '#75715E',
+    },
+    // Add more CSS properties as needed
+  }
+
+  // const AiStyle = {
+  //   ...monokai,
+  //   background: '#140F11',
+  //   'code[class*="language-"]': {
+  //     color: '#FF4081',
+  //     background: '#140F11',
+  //   },
+  //   /* Add any custom CSS properties here */
+  //   // For example, to change the background color:
+  //   'pre[class*="language-"]': {
+  //     color: '#FF4081',
+  //     background: '#140F11',
+  //     // border: '1px solid #0bff48',
+  //     // boxShadow: '0px 4px 8px #0bff48',
+  //     // textShadow: '0 1px rgba(0, 0, 0, 0.3)',
+  //     fontFamily:
+  //       "'Roboto Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
+  //     fontSize: '14px',
+  //     textAlign: 'left',
+  //     whiteSpace: 'pre',
+  //     wordSpacing: 'normal',
+  //     wordBreak: 'normal',
+  //     wordWrap: 'normal',
+  //     lineHeight: '1.5',
+  //     MozTabSize: '4',
+  //     OTabSize: '4',
+  //     tabSize: '4',
+  //     WebkitHyphens: 'none',
+  //     MozHyphens: 'none',
+  //     msHyphens: 'none',
+  //     hyphens: 'none',
+  //     padding: '1em',
+  //     margin: '.5em 0',
+  //     overflow: 'none',
+  //     borderRadius: '8px',
+  //   },
+  //   overflow: 'none',
+  //   // To change the text color:
+  //   color: '#FF4081',
+  //   // To change the color of specific elements, such as keywords:
+  //   'span.keyword': {
+  //     color: '#F92672',
+  //   },
+  //   // To change the color of comments:
+  //   'span.comment': {
+  //     color: '#75715E',
+  //   },
+  //   // Add more CSS properties as needed
+  // }
 
   const { user, error, isLoading } = useUser()
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [AiMessage, setAiMessage] = useState(false)
+
   const [formattedSqlCode, setFormattedSqlCode] = useState('')
   const params = useParams()
   const chatId = params.chats
@@ -114,11 +192,17 @@ const Chat = () => {
       try {
         const response = await fetch('/api/data/TEXT_ER/message')
         const chats = await response.json()
-
         const chat = chats.find(chat => chat.id === chatId)
+        // const formattedSqlCode = SqlFormatter.format(chat.messages.Messages[chat.messages.Messages.length - 1].content)
+        // console.log('formattedSqlCode', formattedSqlCode)
+        // console.log(
+        //   'chat.messages.Messages.length -1',
+        //   chat.messages.Messages.length - 1
+        // )
 
         console.log('chat.messages ', chat.messages.Messages)
-        // console.log('chat.content ', chat.messages.Messages[0].content)
+        console.log('chat.content ', chat.messages.Messages[0].content)
+
         // const userMessage = chat.messages.Messages.find(
         //   message => message.role === 'user'
         // )
@@ -130,6 +214,8 @@ const Chat = () => {
         // }
 
         if (chat && chat.messages && chat.messages.Messages) {
+          // const formattedSqlCode = SqlFormatter.format(chat.messages.Messages)
+          // console.log('formattedSqlCode', formattedSqlCode)
           setMessages(chat.messages.Messages)
         }
       } catch (error) {
@@ -153,16 +239,16 @@ const Chat = () => {
     setMessages(messages)
     await postMessage(chatId, messages)
 
-    await fetch('/api/format')
-      .then(response => response.json())
-      .then(data => {
-        // Set the formatted SQL code in the state
-        setFormattedSqlCode(data.sqlCode)
-      })
-      .catch(error => {
-        // Handle any errors
-        console.error(error)
-      })
+    // await fetch('/api/format')
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     // Set the formatted SQL code in the state
+    //     setFormattedSqlCode(data.sqlCode)
+    //   })
+    //   .catch(error => {
+    //     // Handle any errors
+    //     console.error(error)
+    //   })
   }
 
   return (
@@ -215,8 +301,16 @@ const Chat = () => {
                         />
                       </div>
 
-                      <div className=" w-full   leading-relaxed text-sm   font-medium ">
-                        {m.content}
+                      <div className=" w-full   leading-relaxed text-sm   font-regular ">
+                        {/* {m.content} */}
+                        <SyntaxHighlighter
+                          language="sql"
+                          style={codeStyle2}
+                          wrapLines={true}
+                          wrapLongLines={true}
+                        >
+                          {m.content}
+                        </SyntaxHighlighter>
                       </div>
                     </Stack>
                   </div>
@@ -244,8 +338,16 @@ const Chat = () => {
                       </div>
 
                       <div className=" w-full   leading-relaxed text-sm   font-medium">
-                        {m.content}
-                        {formattedSqlCode && <>{formattedSqlCode}</>}
+                        <SyntaxHighlighter
+                          language="sql"
+                          // style={monokai}
+                          // style={AiStyle}
+                          style={codeStyle}
+                          wrapLines={true}
+                          wrapLongLines={true}
+                        >
+                          {m.content}
+                        </SyntaxHighlighter>
                       </div>
                     </Stack>
                   </div>

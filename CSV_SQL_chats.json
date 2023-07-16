@@ -1,7 +1,12 @@
 [
   {
-    "id": "9b7258d5-5b9f-4ad7-a1f6-a498caf2c25d",
-    "title": "Chat 9b7258d5-5b9f-4ad7-a1f6-a498caf2c25d",
+    "id": "3714d720-c3c8-42a8-98b5-0b7fe4b73b97",
+    "title": "Chat 3714d720-c3c8-42a8-98b5-0b7fe4b73b97",
+    "messages": []
+  },
+  {
+    "id": "bbc48899-346b-4458-b84c-6b2efee71765",
+    "title": "Chat bbc48899-346b-4458-b84c-6b2efee71765",
     "messages": []
   }
 ]

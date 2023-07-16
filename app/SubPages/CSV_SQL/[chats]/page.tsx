@@ -31,6 +31,8 @@ import { useState, useEffect } from 'react'
 import { useCompletion, useChat } from 'ai/react'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
+import BarLoader from 'react-spinners/BarLoader'
+
 const mainPrimary = theme.palette.primary.main
 const darkGreen = theme.palette.border.main
 
@@ -114,7 +116,8 @@ const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit, setMessages } =
     useChat()
   const { user, error, isLoading } = useUser()
-  const [isLoaded, setIsLoaded] = useState(false)
+
+  const [loading, setLoading] = useState(false)
 
   const params = useParams()
   const chatId = params.chats
@@ -143,7 +146,9 @@ const Chat = () => {
     event.preventDefault()
     handleSubmit(event)
 
+    // Delay of 2000 milliseconds (2 seconds)
     setMessages(messages)
+
     await postMessage(chatId, messages)
   }
 
@@ -152,6 +157,7 @@ const Chat = () => {
       handleButtonSubmit(event)
     }
   }
+
   return (
     <>
       <Box sx={{ p: 4 }}>
@@ -175,69 +181,84 @@ const Chat = () => {
             spacing={3}
             sx={{ overflow: 'auto' }}
           >
-            {messages.map(m => (
-              <div key={m.id} className=" justify-start bg-[#1A0B11]  w-[75ch]">
-                {m.role === 'user' ? (
-                  <div className="  ">
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      justifyContent="flex-start"
-                      spacing={2}
-                      sx={{
-                        py: 1.5,
-
-                        px: 2,
-
-                        width: '100%',
-                        backgroundColor: '#1A0B11',
-                      }}
-                    >
-                      <div className=" ">
-                        <Avatar
-                          alt="Remy Sharp"
-                          src={user?.picture || '/Images/Customer.svg'}
-                          sx={{ width: 40, height: 40 }}
-                        />
-                      </div>
-
-                      <div className=" w-full   leading-relaxed text-sm   font-medium ">
-                        {m.content}
-                      </div>
-                    </Stack>
+            {loading ? (
+              <>
+                <div className="relative  ">
+                  <div className="absolute top-[40%] left-[35%]">
+                    <BarLoader color="#FF4081" width="20rem" />
                   </div>
-                ) : (
-                  <div className=" ">
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      justifyContent="flex-start"
-                      spacing={2}
-                      sx={{
-                        px: 2,
-                        py: 1.5,
+                </div>
+              </>
+            ) : (
+              <>
+                {messages.map(m => (
+                  <div
+                    key={m.id}
+                    className=" justify-start bg-[#1A0B11]  w-[75ch]"
+                  >
+                    {m.role === 'user' ? (
+                      <div className="  ">
+                        <Stack
+                          direction="row"
+                          alignItems="center"
+                          justifyContent="flex-start"
+                          spacing={2}
+                          sx={{
+                            py: 1.5,
 
-                        width: '100%',
+                            px: 2,
 
-                        backgroundColor: '#140F11',
-                      }}
-                    >
+                            width: '100%',
+                            backgroundColor: '#1A0B11',
+                          }}
+                        >
+                          <div className=" ">
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={user?.picture || '/Images/Customer.svg'}
+                              sx={{ width: 40, height: 40 }}
+                            />
+                          </div>
+
+                          <div className=" w-full   leading-relaxed text-sm   font-medium ">
+                            {m.content}
+                          </div>
+                        </Stack>
+                      </div>
+                    ) : (
                       <div className=" ">
-                        <Avatar
-                          alt="Remy Sharp"
-                          src={'/Images/gptIcon.svg'}
-                          sx={{ width: 40, height: 40 }}
-                        />
-                      </div>
+                        <Stack
+                          direction="row"
+                          alignItems="center"
+                          justifyContent="flex-start"
+                          spacing={2}
+                          sx={{
+                            px: 2,
+                            py: 1.5,
 
-                      <div className=" w-full   leading-relaxed text-sm   font-medium">
-                        {m.content}
+                            width: '100%',
+
+                            backgroundColor: '#140F11',
+                          }}
+                        >
+                          <div className=" ">
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={'/Images/gptIcon.svg'}
+                              sx={{ width: 40, height: 40 }}
+                            />
+                          </div>
+
+                          <div className=" w-full   leading-relaxed text-sm   font-medium">
+                            {m.content}
+                          </div>
+                        </Stack>
                       </div>
-                    </Stack>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                ))}
+              </>
+            )}
           </Stack>
 
           {/* end two buttons  */}

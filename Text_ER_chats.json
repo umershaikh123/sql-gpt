@@ -15,6 +15,138 @@
           "createdAt": "2023-07-11T17:17:56.291Z",
           "content": "I am an AI language model developed by OpenAI, commonly referred to as GPT-3. I don't have an individual name, as I am an artificial intelligence program. You can simply call me OpenAI or GPT-3. How can I assist you today?",
           "role": "assistant"
+        },
+        {
+          "content": "sql CREATE TABLE Students ( student_id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), date_of_birth DATE ); CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) ); CREATE TABLE Enrollments ( enrollment_id INT PRIMARY KEY, student_id INT, course_id INT, enrollment_date DATE, FOREIGN KEY (student_id) REFERENCES Students(student_id), FOREIGN KEY (course_id) REFERENCES Courses(course_id) );",
+          "role": "user",
+          "createdAt": "2023-07-15T21:48:48.606Z",
+          "id": "bKvOsJq"
+        },
+        {
+          "id": "5nZ5fgg",
+          "createdAt": "2023-07-15T21:48:50.485Z",
+          "content": "SELECT name \nFROM users;",
+          "role": "assistant"
+        },
+        {
+          "content": "sql CREATE TABLE Students ( student_id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), date_of_birth DATE ); CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) ); CREATE TABLE Enrollments ( enrollment_id INT PRIMARY KEY, student_id INT, course_id INT, enrollment_date DATE, FOREIGN KEY (student_id) REFERENCES Students(student_id), FOREIGN KEY (course_id) REFERENCES Courses(course_id) );",
+          "role": "user",
+          "createdAt": "2023-07-15T21:52:07.352Z",
+          "id": "z1ODMmK"
+        },
+        {
+          "id": "oJC4R5Q",
+          "createdAt": "2023-07-15T21:52:09.594Z",
+          "content": "I apologize for the confusion, but I am an AI language model and do not have a specific name. I am designed to assist with providing information, answering questions, and offering support. Is there anything specific you would like assistance with related to SQL or formatting result codes?",
+          "role": "assistant"
+        },
+        {
+          "content": "sql CREATE TABLE Students ( student_id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), date_of_birth DATE ); CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) ); CREATE TABLE Enrollments ( enrollment_id INT PRIMARY KEY, student_id INT, course_id INT, enrollment_date DATE, FOREIGN KEY (student_id) REFERENCES Students(student_id), FOREIGN KEY (course_id) REFERENCES Courses(course_id) );",
+          "role": "user",
+          "createdAt": "2023-07-15T21:54:46.512Z",
+          "id": "9DLkRDB"
+        },
+        {
+          "id": "XkSfOeT",
+          "createdAt": "2023-07-15T21:54:48.621Z",
+          "content": "Sorry, but I am not capable of understanding or executing code related to user input. As a language model AI, I am here to assist with answering questions and providing information related to SQL coding, queries, and database management. If you have any specific SQL-related questions or need assistance with a query or code, please feel free to ask.",
+          "role": "assistant"
+        },
+        {
+          "content": "sql CREATE TABLE Students ( student_id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), date_of_birth DATE ); CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) ); CREATE TABLE Enrollments ( enrollment_id INT PRIMARY KEY, student_id INT, course_id INT, enrollment_date DATE, FOREIGN KEY (student_id) REFERENCES Students(student_id), FOREIGN KEY (course_id) REFERENCES Courses(course_id) );",
+          "role": "user",
+          "createdAt": "2023-07-15T21:58:42.792Z",
+          "id": "4GsRGnZ"
+        },
+        {
+          "id": "XtWPesG",
+          "createdAt": "2023-07-15T21:58:44.611Z",
+          "content": "Sorry, but I'm unable to assist with formatting a result code without any specific input. Can you please provide the input or code that you would like formatted?",
+          "role": "assistant"
+        },
+        {
+          "content": "sql CREATE TABLE Students ( student_id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), date_of_birth DATE ); CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) ); CREATE TABLE Enrollments ( enrollment_id INT PRIMARY KEY, student_id INT, course_id INT, enrollment_date DATE, FOREIGN KEY (student_id) REFERENCES Students(student_id), FOREIGN KEY (course_id) REFERENCES Courses(course_id) );",
+          "role": "user",
+          "createdAt": "2023-07-15T22:05:07.315Z",
+          "id": "Rtutkl5"
+        },
+        {
+          "id": "DJyZ5Fr",
+          "createdAt": "2023-07-15T22:05:09.280Z",
+          "content": "I'm sorry, but I cannot assist with formatting an undefined result code. Please provide the actual SQL code or a specific result code that you would like me to format.",
+          "role": "assistant"
+        },
+        {
+          "content": "sql CREATE TABLE Students ( student_id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), date_of_birth DATE ); CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) ); CREATE TABLE Enrollments ( enrollment_id INT PRIMARY KEY, student_id INT, course_id INT, enrollment_date DATE, FOREIGN KEY (student_id) REFERENCES Students(student_id), FOREIGN KEY (course_id) REFERENCES Courses(course_id) );",
+          "role": "user",
+          "createdAt": "2023-07-15T22:06:47.275Z",
+          "id": "mHZBinJ"
+        },
+        {
+          "id": "e2SwWNv",
+          "createdAt": "2023-07-15T22:06:49.198Z",
+          "content": "Apologies for the confusion. Since the given result code is undefined, I am unable to format it into a readable SQL code. Please provide the specific SQL code or query result you would like me to format, and I'll be happy to assist you.",
+          "role": "assistant"
+        },
+        {
+          "content": "l CREATE TABLE Students ( student_id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), date_of_birth DATE ); CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) ); CREATE TABLE Enrollments ( enrollment_id INT PRIMARY KEY, student_id INT, course_id INT, enrollment_date DATE, FOREIGN KEY (student_id) REFERENCES Students(student_id), FOREIGN KEY (course_id) REFERENCES Courses(course_id) );",
+          "role": "user",
+          "createdAt": "2023-07-15T22:07:43.223Z",
+          "id": "L45fwRY"
+        },
+        {
+          "id": "PJQsx4u",
+          "createdAt": "2023-07-15T22:07:44.755Z",
+          "content": "I'm sorry, but I cannot format the result code if it is undefined. Please provide the specific result code that you would like to have formatted.",
+          "role": "assistant"
+        },
+        {
+          "content": "Enrollments ( enrollment_id INT PRIMARY KEY, student_id INT, course_id INT, enrollment_date DATE, FOREIGN KEY (student_id) REFERENCES Students(student_id), FOREIGN KEY (course_id) REFERENCES Courses(course_id) );",
+          "role": "user",
+          "createdAt": "2023-07-15T22:12:37.903Z",
+          "id": "S5LU9bU"
+        },
+        {
+          "id": "C0kDcNY",
+          "createdAt": "2023-07-15T22:12:40.104Z",
+          "content": "I'm sorry, but I can't assist with formatting the result code \"undefined\" as it is not valid SQL code. Please provide the correct SQL code or a specific query result that needs to be formatted.",
+          "role": "assistant"
+        },
+        {
+          "content": "Enrollments ( enrollment_id INT PRIMARY KEY, student_id INT, course_id INT, enrollment_date DATE, FOREIGN KEY (student_id) REFERENCES Students(student_id), FOREIGN KEY (course_id) REFERENCES Courses(course_id) );",
+          "role": "user",
+          "createdAt": "2023-07-15T22:19:57.455Z",
+          "id": "nkfFMw4"
+        },
+        {
+          "id": "90wkQHX",
+          "createdAt": "2023-07-15T22:19:59.645Z",
+          "content": "```sql\nCREATE TABLE Enrollments (\n    enrollment_id INT PRIMARY KEY,\n    student_id INT,\n    course_id INT,\n    enrollment_date DATE,\n    FOREIGN KEY (student_id) REFERENCES Students(student_id),\n    FOREIGN KEY (course_id) REFERENCES Courses(course_id)\n);\n```",
+          "role": "assistant"
+        },
+        {
+          "content": "CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) );",
+          "role": "user",
+          "createdAt": "2023-07-15T22:21:33.974Z",
+          "id": "Ei64Clp"
+        },
+        {
+          "id": "XU071FD",
+          "createdAt": "2023-07-15T22:21:35.540Z",
+          "content": "```sql\nCREATE TABLE Courses (\n    course_id INT PRIMARY KEY,\n    course_name VARCHAR(255),\n    credit_hours INT,\n    department VARCHAR(255)\n);\n```",
+          "role": "assistant"
+        },
+        {
+          "content": "CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) );",
+          "role": "user",
+          "createdAt": "2023-07-15T22:34:25.912Z",
+          "id": "9qm2O2g"
+        },
+        {
+          "id": "7BdfMSk",
+          "createdAt": "2023-07-15T22:34:27.789Z",
+          "content": "CREATE TABLE Courses (\n    course_id INT PRIMARY KEY,\n    course_name VARCHAR(255),\n    credit_hours INT,\n    department VARCHAR(255)\n);",
+          "role": "assistant"
         }
       ]
     }
@@ -34,6 +166,50 @@
           "id": "wyAYrR2",
           "createdAt": "2023-07-11T19:59:13.026Z",
           "content": "I am an AI language model created by OpenAI and I am known as GPT-3.",
+          "role": "assistant"
+        }
+      ]
+    }
+  },
+  {
+    "id": "8975e4fe-74c5-4540-9b95-63525099abe1",
+    "title": "Chat 8975e4fe-74c5-4540-9b95-63525099abe1",
+    "messages": {
+      "Messages": [
+        {
+          "content": "CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) );",
+          "role": "user",
+          "createdAt": "2023-07-16T15:43:05.543Z",
+          "id": "f3NaUlX"
+        },
+        {
+          "id": "zmQ6PHg",
+          "createdAt": "2023-07-16T15:43:07.473Z",
+          "content": "Here is the formatted code:\n\n```sql\nCREATE TABLE Courses (\n    course_id INT PRIMARY KEY,\n    course_name VARCHAR(255),\n    credit_hours INT,\n    department VARCHAR(255)\n);\n```",
+          "role": "assistant"
+        },
+        {
+          "content": "CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) );",
+          "role": "user",
+          "createdAt": "2023-07-16T15:43:53.896Z",
+          "id": "2o2l0bn"
+        },
+        {
+          "id": "BJh9sJ1",
+          "createdAt": "2023-07-16T15:43:55.321Z",
+          "content": "The given code appears to be the SQL code for creating a table named \"Courses\" with four columns: course_id, course_name, credit_hours, and department. The code is already well-formatted. There is nothing more to be done in terms of formatting.",
+          "role": "assistant"
+        },
+        {
+          "content": "CREATE TABLE Courses ( course_id INT PRIMARY KEY, course_name VARCHAR(255), credit_hours INT, department VARCHAR(255) );",
+          "role": "user",
+          "createdAt": "2023-07-16T15:45:21.375Z",
+          "id": "0GREB5f"
+        },
+        {
+          "id": "oF67f4Z",
+          "createdAt": "2023-07-16T15:45:23.231Z",
+          "content": "CREATE TABLE Courses (\n   course_id INT PRIMARY KEY,\n   course_name VARCHAR(255),\n   credit_hours INT,\n   department VARCHAR(255)\n);",
           "role": "assistant"
         }
       ]

@@ -60,17 +60,33 @@ export const runtime = 'edge'
 export async function POST(req: Request) {
 	const config = new Configuration({
   apiKey:  
-  "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" ,
+  "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" ,
   
 });
 const openai = new OpenAIApi(config);
   const { messages } = await req.json()
 
 
-  const userMessage = messages.find(message => message.role === 'user');
-  const userPrompt = userMessage ? userMessage.content : null;
+//   const userMessage = messages.find(message => message.role === 'user');
+//   const userPrompt = userMessage ? userMessage.content : null;
   
-  console.log("open ai user prompt" ,userPrompt);
+//   console.log("open ai user prompt" ,userPrompt);
+
+
+
+    let lastUserMessageContent = null;
+  console.log("messages.length" , messages.length);
+  
+for (let i = messages.length - 1; i >= 0; i--) {
+  if (messages[i].role === 'user') {
+    lastUserMessageContent = messages[i].content;
+    break;
+  }
+}
+
+console.log("lastUserMessageContent" , lastUserMessageContent);
+
+const userPrompt = lastUserMessageContent
 	
 
   const llm = new ChatOpenAI({
@@ -154,6 +170,64 @@ Handle errors and provide appropriate feedback when the input requirements canno
   });
 
 
+  const chainExecutionResult = await overallChain.call({
+	user_prompt  : userPrompt ,
+  });
+
+//   const result = JSON.stringify(chainExecutionResult);
+  const result= chainExecutionResult.toString();
+
+  console.log("chainExecutionResult " , chainExecutionResult);
+  console.log("result" , result);
+  
+  
+  	const response = await openai.createChatCompletion({
+		model: "gpt-3.5-turbo",
+		stream: true,
+		messages: [
+			{ role: 'system', content: 'you are a SQL assistant , your job is to format the result' },
+			{ role: 'assistant', content: 'Extract result from the following and Format the following result into more readeble SQL code and dont write anything else besides the code' },
+			{ role: 'user', content: `format this result code ${result}` }
+		  ],
+	});
+
+
+
+const stream = OpenAIStream(response);
+ 
+
+	return new StreamingTextResponse(stream);
+ 
+ 
+}
+
+// const formattedSqlCode = SqlFormatter.format(response.choices[0]?.message?.content);
+
+// console.log("chat api format code" ,formattedSqlCode);
+
+
+// const apiUrl = '/api/format';
+// const requestBody = { sqlCode: formattedSqlCode };
+
+// await fetch(apiUrl, {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify(requestBody),
+// })
+//   .then(response => response.json())
+//   .then(data => {
+//     // Handle the response from the API
+//     console.log(data);
+//   })
+//   .catch(error => {
+//     // Handle any errors
+//     console.error(error);
+//   });
+
+
+
 //   const userPrompt =`
 //   Consider a MAIL_ORDER database in which employees take orders for parts
 //   from customers. The data requirements are summarized as follows:
@@ -215,56 +289,213 @@ Handle errors and provide appropriate feedback when the input requirements canno
 //  Design an entity–relationship diagram for the CONFERENCE_REVIEW database and build the design using a data modeling tool such as ERwin or
 // Rational Rose.
 
-  const chainExecutionResult = await overallChain.call({
-	user_prompt  : userPrompt ,
-  });
 
-  const result = JSON.stringify(chainExecutionResult);
 
-  console.log("chainExecutionResult " , chainExecutionResult);
-  console.log("result" , result);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const config = new Configuration({
+ 
+
+//   apiKey:  
+//   "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" ,
   
+// });
+// const openai = new OpenAIApi(config);
+
+// export const runtime = "edge";
+
+// export async function POST(req: Request) {
+// 	const { messages } = await req.json();
+// 	console.log("open AI messages" ,messages);
+// 	// console.log("user prompt" ,messages.Messages.content);
+
+
+// 	// console.log("user prompt , from open api" ,messages.content[0]);
+// 	const userMessage = messages.find(message => message.role === 'user');
+// const userMessageContent = userMessage ? userMessage.content : null;
+
+// console.log("open ai user prompt" ,userMessageContent);
+
+// 	const response = await openai.createChatCompletion({
+// 		model: "gpt-3.5-turbo",
+// 		stream: true,
+// 		messages,
+// 	});
+
+// 	const stream = OpenAIStream(response);
+// 	return new StreamingTextResponse(stream);
+// }
+
+
+
+
+// import { OpenAIStream , streamToResponse } from "ai";
+// // import { Configuration, OpenAIApi  } from "openai-edge";
+// // const { Configuration, OpenAIApi } = require("openai");
+// import { Configuration, OpenAIApi  } from "openai";
+
+// // import SqlFormatter from "sql-formatter";
+
+// const SqlFormatter = require("sql-formatter")
+ 
+
+// import { SequentialChain, LLMChain } from "langchain/chains";
+// import { OpenAI } from "langchain/llms/openai";
+// import { PromptTemplate } from "langchain/prompts";
+
+// import { StreamingTextResponse, LangChainStream } from 'ai'
+// import { ChatOpenAI } from 'langchain/chat_models/openai'
+ 
+ 
+// export const runtime = 'edge'
+ 
+// export async function POST(req: Request) {
+// 	const config = new Configuration({
+//   apiKey:  
+//   "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" ,
   
-  	const response = await openai.createChatCompletion({
-		model: "gpt-3.5-turbo",
-		stream: true,
-		messages: [
-			{ role: 'system', content: 'you are a SQL assistant , your job is to format the result into SQL code' },
-			{ role: 'assistant', content: 'Extract result from the following and Format the following result into more readeble SQL code and dont write anything else besides the code' },
-			{ role: 'user', content: `format this result code ${result}` }
-		  ],
-	});
+// });
+// const openai = new OpenAIApi(config);
+//   const { messages } = await req.json()
 
-// const formattedSqlCode = SqlFormatter.format(response.message.content);
-
-// console.log("chat api format code" ,formattedSqlCode);
-
-
-// const apiUrl = '/api/format';
-// const requestBody = { sqlCode: formattedSqlCode };
-
-// await fetch(apiUrl, {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify(requestBody),
-// })
-//   .then(response => response.json())
-//   .then(data => {
-//     // Handle the response from the API
-//     console.log(data);
-//   })
-//   .catch(error => {
-//     // Handle any errors
-//     console.error(error);
-//   });
-
-
-const stream = OpenAIStream(response);
  
 
-	return new StreamingTextResponse(stream);
+//   let lastUserMessageContent = null;
+//   console.log("messages.length" , messages.length);
+  
+// for (let i = messages.length - 1; i >= 0; i--) {
+//   if (messages[i].role === 'user') {
+//     lastUserMessageContent = messages[i].content;
+//     break;
+//   }
+// }
+
+// console.log("lastUserMessageContent" , lastUserMessageContent);
+
+// const userPrompt = lastUserMessageContent
+
+// // const { Configuration, OpenAIApi } = require("openai");
+
  
+
+// // const completion = await openai.createChatCompletion({
+// //   model: "gpt-3.5-turbo",
+// //   messages: [{"role": "system", "content": "You are a helpful assistant."}, {role: "user", content: "Hello world"}],
+// // });
+// // console.log(completion.data.choices[0].message);
  
-}
+  
+ 
+//   	const response = await openai.createChatCompletion({
+// 		model: "gpt-3.5-turbo",
+	 
+// 		messages: [
+// 			{ role: 'system', content: 'you are a SQL assistant , your job is to format the result' },
+// 			{ role: 'assistant', content: 'Extract result from the following and Format the following result into more readeble SQL code and dont write anything else besides the code' },
+// 			{ role: 'user', content: `format this result code ${userPrompt}` }
+// 		  ],
+// 	});
+
+// 	console.log("response = " ,response , "\n");
+// 	console.log("response.data.choices[0].message " ,response.data.choices[0].message);
+// // console.log("response  before" ,response);
+// // console.log("response body " ,response.body);
+// // console.log("stream" ,stream);
+// // console.log("response body " ,response.body);
+
+// // streamToResponse(stream, response)
+
+// // const stream = OpenAIStream(response);
+
+ 
+// // 	return new StreamingTextResponse(stream);
+
+// // console.log("new StreamingTextResponse(stream)" ,new StreamingTextResponse(stream));
+// return response.data.choices[0].message
+ 
+// }
+
+
+// console.log("userMessage.length - 1 = " ,userMessage.length - 1);
+// console.log("userMessage[userMessage.length - 1].content = " ,userMessage[userMessage.length - 1].content);
+//   const lastUserMessage = userMessage.length > 0 ? userMessage[userMessage.length - 1].content : null;
+// const userPrompt = lastUserMessage;
+  
+//   console.log("open ai user prompt" ,userPrompt);
+	
+//   console.log("messages" ,messages);
+
+
+
+
+
+// if (response.body) {
+// 	const reader = response.body.getReader();
+// 	let result = '';
+// 	while (true) {
+// 		const { done, value } = await reader.read();
+	
+// 		if (done) {
+// 		  break;
+// 		}
+	
+// 		const chunk = new TextDecoder().decode(value);
+// 		result += chunk;
+// 	  }
+	
+// 	  console.log(result);
+
+// }
+
+// const reader = response.body?.getReader(); // Type assertion with '?'
+
+// let result = '';
+
+// if (reader) {
+// 	let result = '';
+  
+// 	const readStream = async () => {
+// 	  while (true) {
+// 		const { done, value } = await reader.read();
+// 		if (done) break;
+// 		result += new TextDecoder().decode(value);
+// 	  }
+// 	};
+  
+// 	await readStream();
+  
+// 	console.log("result = " , result);
+//   }

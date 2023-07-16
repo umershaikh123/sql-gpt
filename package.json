@@ -18,9 +18,11 @@
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
+    "ace-builds": "^1.23.4",
     "ai": "^2.1.17",
     "animejs": "^3.2.1",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
     "child_process": "^1.0.2",
     "dotenv": "^16.3.1",
     "eslint": "8.44.0",
@@ -36,8 +38,10 @@
     "openai-edge": "^1.2.0",
     "postcss": "8.4.24",
     "react": "18.2.0",
+    "react-ace": "^10.1.0",
     "react-dom": "18.2.0",
     "react-spinners": "^0.13.8",
+    "react-syntax-highlighter": "^15.5.0",
     "sql-formatter": "^12.2.3",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.6",
@@ -46,6 +50,7 @@
   "devDependencies": {
     "@types/animejs": "^3.1.7",
     "@types/mysql": "^2.15.21",
+    "@types/react-syntax-highlighter": "^15.5.7",
     "@types/uuid": "^9.0.2"
   }
 }
