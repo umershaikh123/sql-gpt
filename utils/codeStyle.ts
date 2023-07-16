@@ -79,19 +79,19 @@ export const codeStyle = {
       color: '#D9D9D9',
     },
     'hljs-doctag': {
-      color: '#75CA49',
+      color: '#80FF00',
     },
     'hljs-meta-keyword': {
-      color: '#75CA49',
+      color: '#80FF00',
     },
     'hljs-type': {
-      color: '#75CA49',
+      color: '#80FF00',
     },
     'hljs-variable': {
-      color: '#75CA49',
+      color: '#80FF00',
     },
     'hljs-template-variable': {
-      color: '#75CA49',
+      color: '#80FF00',
     },
     'hljs-strong': {
       fontWeight: 'bold',

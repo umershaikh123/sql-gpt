@@ -87,6 +87,38 @@ interface Message {
   content: string
 }
 
+async function generateSqlFile(messages: any, chatID: any) {
+  const requestBody = {
+    chatID,
+    messages,
+  }
+
+  try {
+    // Make an HTTP POST request to the API endpoint
+    const response = await fetch('/api/sql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody), // Replace `messages` with your actual messages data
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to generate SQL file.')
+    }
+
+    const data = await response.json()
+    const { message, fileName } = data
+
+    // Display success message or handle the generated SQL file as needed
+    console.log(message)
+    console.log('Generated SQL file:', fileName)
+  } catch (error) {
+    console.error(error)
+    // Handle error
+  }
+}
+
 export const postMessage = async (ChatId: string, Messages: Message[]) => {
   try {
     const response = await fetch(`/api/data/TEXT_ER/${ChatId}`, {
@@ -110,80 +142,12 @@ export const postMessage = async (ChatId: string, Messages: Message[]) => {
 const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit, setMessages } =
     useChat()
-  // useChat({ api: '/api/completion' })
-  const userStyle = {
-    ...monokai,
-    /* Add any custom CSS properties here */
-    // For example, to change the background color:
-    background: '#272822',
-    // To change the text color:
-    color: '#F8F8F2',
-    // To change the color of specific elements, such as keywords:
-    'span.keyword': {
-      color: '#F92672',
-    },
-    // To change the color of comments:
-    'span.comment': {
-      color: '#75715E',
-    },
-    // Add more CSS properties as needed
-  }
-
-  // const AiStyle = {
-  //   ...monokai,
-  //   background: '#140F11',
-  //   'code[class*="language-"]': {
-  //     color: '#FF4081',
-  //     background: '#140F11',
-  //   },
-  //   /* Add any custom CSS properties here */
-  //   // For example, to change the background color:
-  //   'pre[class*="language-"]': {
-  //     color: '#FF4081',
-  //     background: '#140F11',
-  //     // border: '1px solid #0bff48',
-  //     // boxShadow: '0px 4px 8px #0bff48',
-  //     // textShadow: '0 1px rgba(0, 0, 0, 0.3)',
-  //     fontFamily:
-  //       "'Roboto Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
-  //     fontSize: '14px',
-  //     textAlign: 'left',
-  //     whiteSpace: 'pre',
-  //     wordSpacing: 'normal',
-  //     wordBreak: 'normal',
-  //     wordWrap: 'normal',
-  //     lineHeight: '1.5',
-  //     MozTabSize: '4',
-  //     OTabSize: '4',
-  //     tabSize: '4',
-  //     WebkitHyphens: 'none',
-  //     MozHyphens: 'none',
-  //     msHyphens: 'none',
-  //     hyphens: 'none',
-  //     padding: '1em',
-  //     margin: '.5em 0',
-  //     overflow: 'none',
-  //     borderRadius: '8px',
-  //   },
-  //   overflow: 'none',
-  //   // To change the text color:
-  //   color: '#FF4081',
-  //   // To change the color of specific elements, such as keywords:
-  //   'span.keyword': {
-  //     color: '#F92672',
-  //   },
-  //   // To change the color of comments:
-  //   'span.comment': {
-  //     color: '#75715E',
-  //   },
-  //   // Add more CSS properties as needed
-  // }
 
   const { user, error, isLoading } = useUser()
   const [loading, setLoading] = useState(false)
-  const [AiMessage, setAiMessage] = useState(false)
+  const [lastMessage, setlastMessage] = useState('')
+  // const [chatID, setchatID] = useState('')
 
-  const [formattedSqlCode, setFormattedSqlCode] = useState('')
   const params = useParams()
   const chatId = params.chats
 
@@ -238,6 +202,7 @@ const Chat = () => {
 
     setMessages(messages)
     await postMessage(chatId, messages)
+    await generateSqlFile(messages, chatId)
 
     // await fetch('/api/format')
     //   .then(response => response.json())
@@ -499,3 +464,71 @@ export default function Page() {
               }}
             /> */
 }
+// useChat({ api: '/api/completion' })
+const userStyle = {
+  ...monokai,
+  /* Add any custom CSS properties here */
+  // For example, to change the background color:
+  background: '#272822',
+  // To change the text color:
+  color: '#F8F8F2',
+  // To change the color of specific elements, such as keywords:
+  'span.keyword': {
+    color: '#F92672',
+  },
+  // To change the color of comments:
+  'span.comment': {
+    color: '#75715E',
+  },
+  // Add more CSS properties as needed
+}
+
+// const AiStyle = {
+//   ...monokai,
+//   background: '#140F11',
+//   'code[class*="language-"]': {
+//     color: '#FF4081',
+//     background: '#140F11',
+//   },
+//   /* Add any custom CSS properties here */
+//   // For example, to change the background color:
+//   'pre[class*="language-"]': {
+//     color: '#FF4081',
+//     background: '#140F11',
+//     // border: '1px solid #0bff48',
+//     // boxShadow: '0px 4px 8px #0bff48',
+//     // textShadow: '0 1px rgba(0, 0, 0, 0.3)',
+//     fontFamily:
+//       "'Roboto Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
+//     fontSize: '14px',
+//     textAlign: 'left',
+//     whiteSpace: 'pre',
+//     wordSpacing: 'normal',
+//     wordBreak: 'normal',
+//     wordWrap: 'normal',
+//     lineHeight: '1.5',
+//     MozTabSize: '4',
+//     OTabSize: '4',
+//     tabSize: '4',
+//     WebkitHyphens: 'none',
+//     MozHyphens: 'none',
+//     msHyphens: 'none',
+//     hyphens: 'none',
+//     padding: '1em',
+//     margin: '.5em 0',
+//     overflow: 'none',
+//     borderRadius: '8px',
+//   },
+//   overflow: 'none',
+//   // To change the text color:
+//   color: '#FF4081',
+//   // To change the color of specific elements, such as keywords:
+//   'span.keyword': {
+//     color: '#F92672',
+//   },
+//   // To change the color of comments:
+//   'span.comment': {
+//     color: '#75715E',
+//   },
+//   // Add more CSS properties as needed
+// }

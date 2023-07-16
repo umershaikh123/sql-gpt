@@ -44,7 +44,7 @@ import { Configuration, OpenAIApi } from "openai-edge";
 
 // import SqlFormatter from "sql-formatter";
 
-const SqlFormatter = require("sql-formatter")
+ 
  
 
 import { SequentialChain, LLMChain } from "langchain/chains";
@@ -60,7 +60,7 @@ export const runtime = 'edge'
 export async function POST(req: Request) {
 	const config = new Configuration({
   apiKey:  
-  "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" ,
+  "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" ,
   
 });
 const openai = new OpenAIApi(config);
@@ -91,15 +91,15 @@ const userPrompt = lastUserMessageContent
 
   const llm = new ChatOpenAI({
     streaming: true,
-	openAIApiKey: "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"
+	openAIApiKey:  "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" ,
   })
  
 const first_template = `
 You are a powerful SQL Agent powered by OpenAI's language model. 
 You will assists users in converting text requirements from user_prompt into SQL code . It could be Oracle , mySQL, postgresSQL , SQLite or any other relational database specified by user ,
  if the user does not specify the database just convert it into mySQL code. To ensure accurate assistance, 
- please make sure the user requirements are in a SQL-related context. The requirements should be relevant to SQL and align with the syntax 
-and functionality typically associated with SQL databases.  If the provided requirements are not related to SQL or do not seem valid,
+The requirements should be relevant to SQL and align with the syntax 
+and functionality typically associated with SQL databases. If the provided requirements are not related to SQL or do not seem valid,
 you will politely inform you and request SQL-related requirements.
 `;
 
@@ -116,7 +116,7 @@ const first_prompt = new PromptTemplate({
 
 
 const second_template = `
-ou are using an SQL application powered by GPT to convert requirements into SQL code.      
+you are using an SQL application powered by GPT to convert requirements into SQL code.      
 If you feel some requirements are unclear ,missing or vaugue then make any valid and logical assumptions about the given requirements and add additional requirements as suitable , Also mention these additional changes.                                                  
  
 Generate MySQL code to create the required tables based on the extracted information. The code should include table names, attributes, data types, and any constraints, such as primary keys.
@@ -185,13 +185,48 @@ Handle errors and provide appropriate feedback when the input requirements canno
 		model: "gpt-3.5-turbo",
 		stream: true,
 		messages: [
-			{ role: 'system', content: 'you are a SQL assistant , your job is to format the result' },
-			{ role: 'assistant', content: 'Extract result from the following and Format the following result into more readeble SQL code and dont write anything else besides the code' },
-			{ role: 'user', content: `format this result code ${result}` }
+			{ role: 'assistant', content: `
+			you are a SQL assistant , your job is to format the the given code
+			
+			For Example :
+
+			user : 'Based on the given task, I will assume the following requirements:\n\n1. We need to create three tables named "Customers", "Orders", and "Products".\n2. The "Customers" table will have attributes such as "customer_id" (primary key), "name", "email", and "address".\n3. The "Orders" table will have attributes such as "order_id" (primary key), "customer_id" (foreign key referencing "Customers" table), "order_date", and "total_amount".\n4. The "Products" table will have attributes such as "product_id" (primary key), "name", "price", and "stock_quantity".\n\nBased on these assumptions, below is the MySQL code to create the required tables with the mentioned attributes and constraints:\n\nsql\n-- Create Customers table\nCREATE TABLE Customers (\n  customer_id INT PRIMARY KEY,\n  name VARCHAR(255),\n  email VARCHAR(255),\n  address VARCHAR(255)\n);\n\n-- Create Orders table\nCREATE TABLE Orders (\n  order_id INT PRIMARY KEY,\n  customer_id INT,\n  order_date DATE,\n  total_amount DECIMAL(10, 2),\n  FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)\n);\n\n-- Create Products table\nCREATE TABLE Products (\n  product_id INT PRIMARY KEY,\n  name VARCHAR(255),\n  price DECIMAL(10, 2),\n  stock_quantity INT\n);\n\n\nNote: I have made assumptions about the data types for attributes such as "name", "email", "address", "order_date", "total_amount", and "stock_quantity". These assumptions can be revised based on specific requirements and data characteristics.
+			Assistant : 
+
+			-- Create Customers table
+CREATE TABLE Customers (
+  customer_id INT PRIMARY KEY,
+  name VARCHAR(255),
+  email VARCHAR(255),
+  address VARCHAR(255)
+);
+
+-- Create Orders table
+CREATE TABLE Orders (
+  order_id INT PRIMARY KEY,
+  customer_id INT,
+  order_date DATE,
+  total_amount DECIMAL(10, 2),
+  FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+
+-- Create Products table
+CREATE TABLE Products (
+  product_id INT PRIMARY KEY,
+  name VARCHAR(255),
+  price DECIMAL(10, 2),
+  stock_quantity INT
+);
+
+			` },
+			// { role: 'assistant', content: 'Extract result from the following and Format the following result into more readeble SQL code and dont write anything else besides the code' },
+			{ role: 'user', content: `${result}` }
 		  ],
 	});
 
 
+	console.log();
+	
 
 const stream = OpenAIStream(response);
  
@@ -385,7 +420,7 @@ const stream = OpenAIStream(response);
 // export async function POST(req: Request) {
 // 	const config = new Configuration({
 //   apiKey:  
-//   "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" ,
+//   "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" ,
   
 // });
 // const openai = new OpenAIApi(config);
