@@ -1,0 +1,22 @@
+Table "Customers" {
+  "customer_id" INT [pk]
+  "name" VARCHAR(255)
+  "email" VARCHAR(255)
+  "address" VARCHAR(255)
+}
+
+Table "Orders" {
+  "order_id" INT [pk]
+  "customer_id" INT
+  "order_date" DATE
+  "total_amount" DECIMAL(10,2)
+}
+
+Table "Products" {
+  "product_id" INT [pk]
+  "name" VARCHAR(255)
+  "price" DECIMAL(10,2)
+  "stock_quantity" INT
+}
+
+Ref:"Customers"."customer_id" < "Orders"."customer_id"

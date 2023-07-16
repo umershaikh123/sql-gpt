@@ -41,36 +41,37 @@ export async function POST(req: Request) {
 
     console.log('sql2dbml command executed successfully.');
     console.log(`Output file generated at: ${output}`);
+     NextResponse.json({ output});
   });
 
-  return NextResponse.json({ output});
 
   // const command2 =  `dbdocs build mydatabase.dbml --project demo`
+  const command2 =  `dbdocs build ${output} --project demo`
 
-  // exec(command2, (error, stdout, stderr) => {
-  //   if (error) {
-  //     console.error(`Error executing dbdocs command: ${error}`);
-  //     return;
-  //   }
+  exec(command2, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error executing dbdocs command: ${error}`);
+      return;
+    }
 
-  //   if (stderr) {
-  //     console.error(`dbdocs command encountered an error: ${stderr}`);
-  //     return;
-  //   }
+    if (stderr) {
+      console.error(`dbdocs command encountered an error: ${stderr}`);
+      return;
+    }
 
-  //   const linkRegex = /Visit:\s+(https?:\/\/\S+)/;
-  //   const linkMatch = stdout.match(linkRegex);
+    const linkRegex = /Visit:\s+(https?:\/\/\S+)/;
+    const linkMatch = stdout.match(linkRegex);
 
-  //   if (linkMatch) {
-  //     const generatedLink = linkMatch[1];
-  //     console.log('dbdocs command executed successfully.');
-  //     console.log(`Generated link: ${generatedLink}`);
-  //     return generatedLink;
-  //   } else {
-  //     console.error('Failed to retrieve generated link from dbdocs command output.');
-  //     return null;
-  //   }
-
+    if (linkMatch) {
+      const generatedLink = linkMatch[1];
+      console.log('dbdocs command executed successfully.');
+      console.log(`Generated link: ${generatedLink}`);
+      return generatedLink;
+    } else {
+      console.error('Failed to retrieve generated link from dbdocs command output.');
+      return null;
+    }
+  });
 
   
     

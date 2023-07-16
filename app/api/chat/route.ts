@@ -59,8 +59,7 @@ export const runtime = 'edge'
  
 export async function POST(req: Request) {
 	const config = new Configuration({
-  apiKey:  
-  "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" ,
+    apiKey: process.env.OPENAI_API_KEY,
   
 });
 const openai = new OpenAIApi(config);
@@ -91,7 +90,7 @@ const userPrompt = lastUserMessageContent
 
   const llm = new ChatOpenAI({
     streaming: true,
-	openAIApiKey:  "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" ,
+	openAIApiKey:   process.env.OPENAI_API_KEY,
   })
  
 const first_template = `
@@ -192,7 +191,8 @@ Handle errors and provide appropriate feedback when the input requirements canno
 
 			user : 'Based on the given task, I will assume the following requirements:\n\n1. We need to create three tables named "Customers", "Orders", and "Products".\n2. The "Customers" table will have attributes such as "customer_id" (primary key), "name", "email", and "address".\n3. The "Orders" table will have attributes such as "order_id" (primary key), "customer_id" (foreign key referencing "Customers" table), "order_date", and "total_amount".\n4. The "Products" table will have attributes such as "product_id" (primary key), "name", "price", and "stock_quantity".\n\nBased on these assumptions, below is the MySQL code to create the required tables with the mentioned attributes and constraints:\n\nsql\n-- Create Customers table\nCREATE TABLE Customers (\n  customer_id INT PRIMARY KEY,\n  name VARCHAR(255),\n  email VARCHAR(255),\n  address VARCHAR(255)\n);\n\n-- Create Orders table\nCREATE TABLE Orders (\n  order_id INT PRIMARY KEY,\n  customer_id INT,\n  order_date DATE,\n  total_amount DECIMAL(10, 2),\n  FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)\n);\n\n-- Create Products table\nCREATE TABLE Products (\n  product_id INT PRIMARY KEY,\n  name VARCHAR(255),\n  price DECIMAL(10, 2),\n  stock_quantity INT\n);\n\n\nNote: I have made assumptions about the data types for attributes such as "name", "email", "address", "order_date", "total_amount", and "stock_quantity". These assumptions can be revised based on specific requirements and data characteristics.
 			Assistant : 
-
+      Formated code is below 
+      \`\`\`sql
 			-- Create Customers table
 CREATE TABLE Customers (
   customer_id INT PRIMARY KEY,
@@ -217,6 +217,10 @@ CREATE TABLE Products (
   price DECIMAL(10, 2),
   stock_quantity INT
 );
+
+\`\`\`
+
+
 
 			` },
 			// { role: 'assistant', content: 'Extract result from the following and Format the following result into more readeble SQL code and dont write anything else besides the code' },
@@ -297,8 +301,7 @@ const stream = OpenAIStream(response);
 // that he or she may also direct).
 // ■ Production companies are identified by name and each has an address. A
 // production company produces one or more movies.
-//  Design an entity–relationship diagram for the movie database and enter the
-// design using a data modeling tool such as ERwin or Rational Rose
+ 
 
 
 // Consider a CONFERENCE_REVIEW database in which researchers submit
