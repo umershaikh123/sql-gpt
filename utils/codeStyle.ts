@@ -1,6 +1,6 @@
 export const codeStyle = {
   'code[class*="language-"]': {
-    color: '#FF4081',
+    color: '#D9D9D9',
     background: '#140F11',
     // textShadow: '0 1px rgba(0, 0, 0, 0.3)',
     fontFamily: "'Roboto Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
@@ -20,7 +20,7 @@ export const codeStyle = {
     hyphens: 'none',
   },
   'pre[class*="language-"]': {
-    color: '#FF4081',
+    color: '#D9D9D9',
     background: '#140F11',
     // border: '1px solid #0bff48',
     // boxShadow: '0px 4px 8px #0bff48',
@@ -46,13 +46,59 @@ export const codeStyle = {
     borderRadius: '8px',
   },
       'span.keyword': {
-      color: '#F92672',
+      color: '#FF4081',
     },
     // To change the color of comments:
     'span.comment': {
-      color: '#75715E',
+      color: '#80FF00',
     },
-
+    'hljs-comment': {
+      color: '#80FF00',
+      fontStyle: 'bold',
+    },
+    'hljs-quote': {
+      color: '#80FF00',
+      fontStyle: 'bold',
+    },
+    'hljs-keyword': {
+      color: '#FF4081',
+    },
+    'hljs-selector-tag': {
+      color: '#FF4081',
+    },
+    'hljs-literal': {
+      color: '#FF4081',
+    },
+    'hljs-subst': {
+      color: '#FF4081',
+    },
+    'hljs-number': {
+      color: '#D9D9D9',
+    },
+    'hljs-string': {
+      color: '#D9D9D9',
+    },
+    'hljs-doctag': {
+      color: '#75CA49',
+    },
+    'hljs-meta-keyword': {
+      color: '#75CA49',
+    },
+    'hljs-type': {
+      color: '#75CA49',
+    },
+    'hljs-variable': {
+      color: '#75CA49',
+    },
+    'hljs-template-variable': {
+      color: '#75CA49',
+    },
+    'hljs-strong': {
+      fontWeight: 'bold',
+    },
+    'hljs-emphasis': {
+      fontStyle: 'bold',
+    },
 
   // ':not(pre) > code[class*="language-"]': {
   //   background: '#0C0B0B',
@@ -161,9 +207,7 @@ export const codeStyle = {
   bold: {
     fontWeight: 'bold',
   },
-  italic: {
-    fontStyle: 'italic',
-  },
+ 
 };
 
 
@@ -219,11 +263,11 @@ export const codeStyle2 = {
     borderRadius: '8px',
   },
       'span.keyword': {
-      color: '#F92672',
+      color: '#FF4081',
     },
     // To change the color of comments:
     'span.comment': {
-      color: '#75715E',
+      color: '#80FF00',
     },
 
     
@@ -334,7 +378,5 @@ export const codeStyle2 = {
   bold: {
     fontWeight: 'bold',
   },
-  italic: {
-    fontStyle: 'italic',
-  },
+ 
 };
