@@ -43,9 +43,10 @@ export const ChatHistory: React.FC<ChatHistoryProps> = ({ url, type }) => {
           spacing={5}
           sx={{
             p: 3,
-
-            height: '42rem',
+            minHeight: '70vh',
+            height: '100%',
             overflow: 'auto',
+            // width: { xs: '80%', xl: '100%' },
           }}
         >
           {/* start buttons */}

@@ -58,7 +58,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               flexBasis: '20rem',
               flexShrink: 10,
               height: '75vh',
-
+              // width: { xs: '80%', xl: '100%' },
+              // flexBasis: { md: '5rem', xl: '20rem' },
               background: theme.palette.secondary.main,
             }}
           >
@@ -91,7 +92,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               flexGrow: 0,
               flexBasis: '20rem',
               flexShrink: 10,
-
+              display: { sm: 'none', xl: 'flex' },
               height: '75vh',
               background: theme.palette.secondary.main,
             }}

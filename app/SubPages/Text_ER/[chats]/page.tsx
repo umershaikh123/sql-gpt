@@ -53,7 +53,6 @@ const CssTextField = styled(TextField)({
   '& .MuiInputBase-input': {
     color: theme.palette.primary.main,
     height: '3rem',
-    width: '74ch',
   },
 
   '& label.Mui-focused': {
@@ -256,8 +255,10 @@ const Chat = () => {
           spacing={0}
           sx={{
             py: 2,
+            maxHeight: '70vh',
+            minHeight: '70vh',
+            height: '100%',
 
-            height: '40rem',
             overflow: 'auto',
           }}
         >
@@ -267,13 +268,15 @@ const Chat = () => {
             justifyContent="flex-start"
             alignItems="start"
             spacing={3}
-            sx={{ overflow: 'auto' }}
+            sx={{
+              overflow: 'auto',
+
+              width: '100%',
+              maxWidth: '100%',
+            }}
           >
             {messages.map(m => (
-              <div
-                key={m.id}
-                className=" justify-start bg-[#1A0B11]  w-[75ch] "
-              >
+              <div key={m.id} className=" justify-start bg-[#1A0B11]  w-full ">
                 {m.role === 'user' ? (
                   <div className="  ">
                     <Stack
@@ -357,17 +360,24 @@ const Chat = () => {
             justifyContent="flex-end"
             alignItems="center"
             spacing={2}
-            sx={{ mt: 4 }}
+            sx={{
+              mt: 4,
+
+              width: '100%',
+              maxWidth: '100%',
+            }}
           >
-            <form onSubmit={handleButtonSubmit}>
+            <form onSubmit={handleButtonSubmit} className="  w-full">
               <CssTextField
-                id="outlined-basic"
                 label="Prompt"
                 maxRows={10}
+                fullWidth
+                id="fullWidth"
                 multiline
                 value={input}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
+                // sx={{ width: '100%' }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment

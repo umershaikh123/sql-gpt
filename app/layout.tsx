@@ -49,12 +49,8 @@ export function Index({ children }: IndexProps) {
       })
     }
   }, [])
-  // console.log('user = ', user)
 
-  // Auth loading
   if (isLoading) {
-    // return <BarLoader color="#FF4081" loading={isLoading} />
-
     return (
       <>
         <div className="relative w-[100rem] h-[90vh]">
@@ -64,23 +60,17 @@ export function Index({ children }: IndexProps) {
         </div>
       </>
     )
-    // return <p>loading auth ...</p>
   }
+
   if (error) return <div>{error.message}</div>
 
-  if (user) {
+  if (!user) {
     return (
-      // <motion.div
-      //   initial={{ opacity: 0 }}
-      //   animate={{ opacity: 1 }}
-      //   transition={{ duration: 0.6 }}
-      // >
       <div className=" container mx-auto" ref={Ref}>
         <Navbar />
 
         {children}
       </div>
-      // </motion.div>
     )
   } else {
     return (
