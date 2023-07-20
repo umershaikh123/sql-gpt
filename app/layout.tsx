@@ -14,6 +14,7 @@ import BarLoader from 'react-spinners/BarLoader'
 import PulseLoader from 'react-spinners/PulseLoader'
 import anime from 'animejs/lib/anime.es.js'
 import { motion } from 'framer-motion'
+import PocketBase from 'pocketbase'
 
 const override: CSSProperties = {
   display: 'block',
@@ -30,6 +31,43 @@ export const metadata = {
 
 type IndexProps = {
   children: ReactNode
+}
+
+async function createUser(user: any) {
+  const pb = new PocketBase('http://127.0.0.1:8090')
+  const authData = await pb.admins.authWithPassword(
+    process.env.email || 'umershaikh217@gmail.com',
+    process.env.pass || 'umer123456'
+  )
+
+  //   const records = await pb.collection('posts').getFullList({
+  //     sort: '-created',
+  // });
+  const resultList = await pb.collection('users').getFullList({
+    filter: `authID = "${user?.sub}"`,
+    // sort: '-created',
+  })
+
+  console.log('resultList', resultList)
+
+  if (resultList.length === 0) {
+    // User does not exist, add their information to the 'users' collection
+
+    try {
+      const record = await pb.collection('users').create({
+        userName: user?.name,
+        email: user?.email,
+        authID: user?.sub,
+      })
+
+      console.log('user created', record)
+    } catch (e) {
+      console.log('user creation failed', e)
+    }
+  } else {
+    // User already exists
+    console.log('User already exists in the database.')
+  }
 }
 
 export function Index({ children }: IndexProps) {
@@ -64,7 +102,12 @@ export function Index({ children }: IndexProps) {
 
   if (error) return <div>{error.message}</div>
 
-  if (!user) {
+  console.log('user email', user?.email)
+  console.log('user?.email_verified', user?.email_verified)
+
+  if (user) {
+    createUser(user)
+
     return (
       <div className=" container mx-auto" ref={Ref}>
         <Navbar />
