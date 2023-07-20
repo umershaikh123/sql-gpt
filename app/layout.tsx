@@ -48,7 +48,7 @@ async function createUser(user: any) {
     // sort: '-created',
   })
 
-  console.log('resultList', resultList)
+  // console.log('resultList', resultList)
 
   if (resultList.length === 0) {
     // User does not exist, add their information to the 'users' collection
@@ -60,13 +60,12 @@ async function createUser(user: any) {
         authID: user?.sub,
       })
 
-      console.log('user created', record)
+      // console.log('user created', record)
     } catch (e) {
-      console.log('user creation failed', e)
+      // console.log('user creation failed', e)
     }
   } else {
-    // User already exists
-    console.log('User already exists in the database.')
+    // console.log('User already exists in the database.')
   }
 }
 
@@ -102,8 +101,8 @@ export function Index({ children }: IndexProps) {
 
   if (error) return <div>{error.message}</div>
 
-  console.log('user email', user?.email)
-  console.log('user?.email_verified', user?.email_verified)
+  // console.log('user email', user?.email)
+  // console.log('user?.email_verified', user?.email_verified)
 
   if (user) {
     createUser(user)

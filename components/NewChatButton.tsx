@@ -9,6 +9,7 @@ import { promises as fsPromises } from 'fs'
 import anime from 'animejs/lib/anime.es.js'
 import { motion } from 'framer-motion'
 import PocketBase from 'pocketbase'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 interface NewChatButtonProps {
   url: string
@@ -20,9 +21,83 @@ interface Chat {
   messages: string[]
 }
 
-const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
+async function fetchConversations(user: any) {
   const pb = new PocketBase('http://127.0.0.1:8090')
-  const [TextERchats, setTextERchats] = useState<Chat[]>([])
+  const authData = await pb.admins.authWithPassword(
+    process.env.email || 'umershaikh217@gmail.com',
+    process.env.pass || 'umer123456'
+  )
+
+  const conversations = await pb.collection('conversation').getFullList({
+    // filter: `authID = "${user?.sub}"`,
+    sort: '-created',
+  })
+
+  console.log('conversations', conversations)
+
+  return conversations
+}
+
+async function SetConversation(user: any) {
+  const pb = new PocketBase('http://127.0.0.1:8090')
+  const authData = await pb.admins.authWithPassword(
+    process.env.email || 'umershaikh217@gmail.com',
+    process.env.pass || 'umer123456'
+  )
+
+  const userResultList = await pb.collection('users').getFullList({
+    filter: `authID = "${user?.sub}"`,
+  })
+
+  // console.log('userResultList', userResultList)
+
+  let userId // Variable to store the user_id
+
+  if (userResultList.length === 1) {
+    // User with the specified Auth0 ID found in the 'users' collection
+    // Get the user_id from the user's record
+    userId = userResultList[0].id
+  } else {
+    // User with the specified Auth0 ID not found in the 'users' collection
+    console.log('User not found or multiple users with the same Auth0 ID.')
+  }
+
+  if (userId) {
+    // If the userId is defined (user found in the 'users' collection)
+    // Create a new conversation in the 'conversation' table with the retrieved user_id
+    const ID = await pb.collection('conversation').create({
+      userID: userId,
+      // Other conversation data here...
+    })
+
+    // console.log('Conversation Record', ID)
+    // console.log('Conversation created', ID.id)
+    return ID.id
+  }
+}
+
+async function fetchNewChats(user: any, setTextERchats: any, TextERchats: any) {
+  const result = await fetchConversations(user)
+  const ids = result.map(record => record.id)
+  console.log(ids)
+  const updatedChats = [...TextERchats, ids]
+  setTextERchats(updatedChats)
+}
+
+async function fetchDeletedChats(
+  user: any,
+  setTextERchats: any,
+  TextERchats: any
+) {
+  const result = await fetchConversations(user)
+  const ids = result.map(record => record.id)
+  console.log(ids)
+  setTextERchats(ids)
+}
+
+const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
+  const [TextERchats, setTextERchats] = useState<any>([])
+  const { user } = useUser()
 
   const router = useRouter()
 
@@ -30,34 +105,35 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
     return uuidv4()
   }
 
-  useEffect(() => {
-    const fetchChats = async () => {
-      try {
-        const response = await fetch('/api/data/TEXT_ER', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        if (response.ok) {
-          const data = await response.json()
-          setTextERchats(data)
-        } else {
-          console.error('Failed to fetch chats')
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    }
+  // useEffect(() => {
+  //   const fetchChats = async () => {
+  //     try {
+  //       const response = await fetch('/api/data/TEXT_ER', {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       })
+  //       if (response.ok) {
+  //         const data = await response.json()
+  //         setTextERchats(data)
+  //       } else {
+  //         console.error('Failed to fetch chats')
+  //       }
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
 
-    fetchChats()
-  }, [])
+  //   fetchChats()
+  // }, [])
 
   const Ref = useRef<any>(null)
 
   useEffect(() => {
     const element = Ref.current
 
+    fetchNewChats(user, setTextERchats, TextERchats)
     if (element) {
       anime({
         targets: element,
@@ -70,53 +146,79 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
   }, [])
 
   const handleNewChat = async (): Promise<void> => {
-    const newChatId = generateUniqueChatId()
-    const newChat: Chat = {
-      id: newChatId,
-      title: `Chat ${newChatId}`,
-      messages: [],
-    }
-    const updatedChats = [...TextERchats, newChat]
+    const ID = await SetConversation(user)
+    console.log('ID new chat', ID)
+
+    // setTextERchats(ID)
+    const updatedChats = [...TextERchats, ID]
     setTextERchats(updatedChats)
 
-    try {
-      const response = await fetch('/api/data/TEXT_ER', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedChats),
-      })
+    // const newChatId = generateUniqueChatId()
+    // const newChat: Chat = {
+    //   id: ID || 'No ID',
+    //   title: `Chat ${ID}`,
+    //   messages: [],
+    // }
+    // const updatedChats = [...TextERchats, newChat]
+    // setTextERchats(updatedChats)
 
-      if (!response.ok) {
-        console.error('Error saving chats')
-      }
-    } catch (error) {
-      console.error(error)
-    }
+    // try {
+    //   const response = await fetch('/api/data/TEXT_ER', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(updatedChats),
+    //   })
 
-    router.push(`/SubPages/${url}/${newChatId}`)
+    //   if (!response.ok) {
+    //     console.error('Error saving chats')
+    //   }
+    // } catch (error) {
+    //   console.error(error)
+    // }
+
+    router.push(`/SubPages/${url}/${ID}`)
   }
 
-  const handleRemoveChat = (chatId: string): void => {
-    const updatedChats = TextERchats.filter(chat => chat.id !== chatId)
-    setTextERchats(updatedChats)
+  const handleRemoveChat = async (chatId: string) => {
+    const pb = new PocketBase('http://127.0.0.1:8090')
+    const authData = await pb.admins.authWithPassword(
+      process.env.email || 'umershaikh217@gmail.com',
+      process.env.pass || 'umer123456'
+    )
 
-    fetch(`/api/data/TEXT_ER/${chatId}`, {
-      method: 'DELETE',
-    })
-      .then(response => {
-        if (!response.ok) {
-          console.error('Failed to delete chat')
-        }
-        if (response.ok) {
-          console.error('Success')
-          router.push(`/SubPages/${url}`)
-        }
-      })
-      .catch(error => {
-        console.error(error)
-      })
+    const result = await pb.collection('conversation').delete(chatId)
+    console.log('result', result)
+
+    // const updatedChats = [...TextERchats, ID]
+    // setTextERchats(updatedChats)
+
+    if (result == true) {
+      router.push(`/SubPages/${url}`)
+    }
+
+    fetchDeletedChats(user, setTextERchats, TextERchats)
+
+    // fetchConversations(user)
+    // const updatedChats = TextERchats.filter(chat => chat.id !== chatId)
+    // setTextERchats(updatedChats)
+
+    //   fetch(`/api/data/TEXT_ER/${chatId}`, {
+    //     method: 'DELETE',
+    //   })
+    //     .then(response => {
+    //       if (!response.ok) {
+    //         console.error('Failed to delete chat')
+    //       }
+    //       if (response.ok) {
+    //         console.error('Success')
+    //         router.push(`/SubPages/${url}`)
+    //       }
+    //     })
+    //     .catch(error => {
+    //       console.error(error)
+    //     })
   }
 
   return (
@@ -135,14 +237,14 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
         New Chat
       </Button>
 
-      {TextERchats.map(chat => (
+      {TextERchats.map(id => (
         <>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
-            <div key={chat.id}>
+            <div key={id}>
               <ButtonGroup
                 disableElevation
                 variant="outlined"
@@ -152,7 +254,7 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
                   variant="outlined"
                   color="primary"
                   startIcon={<ChatBubbleOutlineOutlinedIcon />}
-                  onClick={() => router.push(`/SubPages/${url}/${chat.id}`)}
+                  onClick={() => router.push(`/SubPages/${url}/${id}`)}
                   sx={{
                     textTransform: 'capitalize',
                   }}
@@ -167,14 +269,14 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
                       textOverflow: 'ellipsis',
                     }}
                   >
-                    {chat.id}
+                    {id}
                   </Typography>
                 </Button>
 
                 <Button
                   variant="outlined"
                   color="primary"
-                  onClick={() => handleRemoveChat(chat.id)}
+                  onClick={() => handleRemoveChat(id)}
                   sx={{ borderLeft: 'none', width: '0.5rem' }}
                 >
                   <DeleteOutlineOutlinedIcon />
