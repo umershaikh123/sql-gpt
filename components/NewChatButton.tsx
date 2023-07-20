@@ -10,6 +10,7 @@ import anime from 'animejs/lib/anime.es.js'
 import { motion } from 'framer-motion'
 import PocketBase from 'pocketbase'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import { log } from 'console'
 
 interface NewChatButtonProps {
   url: string
@@ -28,9 +29,28 @@ async function fetchConversations(user: any) {
     process.env.pass || 'umer123456'
   )
 
+  const userResultList = await pb.collection('users').getFullList({
+    filter: `authID = "${user?.sub}"`,
+  })
+
+  // console.log('userResultList', userResultList)
+
+  let userId // Variable to store the user_id
+
+  if (userResultList.length === 1) {
+    // User with the specified Auth0 ID found in the 'users' collection
+    // Get the user_id from the user's record
+    userId = userResultList[0].id
+  } else {
+    // User with the specified Auth0 ID not found in the 'users' collection
+    console.log('User not found or multiple users with the same Auth0 ID.')
+  }
+
+  console.log('userId', userId)
+
   const conversations = await pb.collection('conversation').getFullList({
-    // filter: `authID = "${user?.sub}"`,
-    sort: '-created',
+    filter: `userID = "${userId}"`,
+    // sort: '-created',
   })
 
   console.log('conversations', conversations)
@@ -153,31 +173,6 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
     const updatedChats = [...TextERchats, ID]
     setTextERchats(updatedChats)
 
-    // const newChatId = generateUniqueChatId()
-    // const newChat: Chat = {
-    //   id: ID || 'No ID',
-    //   title: `Chat ${ID}`,
-    //   messages: [],
-    // }
-    // const updatedChats = [...TextERchats, newChat]
-    // setTextERchats(updatedChats)
-
-    // try {
-    //   const response = await fetch('/api/data/TEXT_ER', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(updatedChats),
-    //   })
-
-    //   if (!response.ok) {
-    //     console.error('Error saving chats')
-    //   }
-    // } catch (error) {
-    //   console.error(error)
-    // }
-
     router.push(`/SubPages/${url}/${ID}`)
   }
 
@@ -199,26 +194,6 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
     }
 
     fetchDeletedChats(user, setTextERchats, TextERchats)
-
-    // fetchConversations(user)
-    // const updatedChats = TextERchats.filter(chat => chat.id !== chatId)
-    // setTextERchats(updatedChats)
-
-    //   fetch(`/api/data/TEXT_ER/${chatId}`, {
-    //     method: 'DELETE',
-    //   })
-    //     .then(response => {
-    //       if (!response.ok) {
-    //         console.error('Failed to delete chat')
-    //       }
-    //       if (response.ok) {
-    //         console.error('Success')
-    //         router.push(`/SubPages/${url}`)
-    //       }
-    //     })
-    //     .catch(error => {
-    //       console.error(error)
-    //     })
   }
 
   return (
@@ -237,7 +212,7 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
         New Chat
       </Button>
 
-      {TextERchats.map(id => (
+      {TextERchats.map((id: string) => (
         <>
           <motion.div
             initial={{ opacity: 0 }}
@@ -263,6 +238,7 @@ const TextER: React.FC<NewChatButtonProps> = ({ url }) => {
                     variant="subtitle2"
                     sx={{
                       maxWidth: '7rem',
+                      width: { xs: 'auto', xl: '7rem' },
                       fontSize: '12px',
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
