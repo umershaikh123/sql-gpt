@@ -34,38 +34,26 @@ type IndexProps = {
 }
 
 async function createUser(user: any) {
-  const pb = new PocketBase('http://127.0.0.1:8090')
-  const authData = await pb.admins.authWithPassword(
-    process.env.email || 'umershaikh217@gmail.com',
-    process.env.pass || 'umer123456'
-  )
+  try {
+    // Make a POST request to the API endpoint with the user data in the request body
+    const response = await fetch('/api/pocketBase/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user }), // Assuming 'user' is an object with user data
+    })
 
-  //   const records = await pb.collection('posts').getFullList({
-  //     sort: '-created',
-  // });
-  const resultList = await pb.collection('users').getFullList({
-    filter: `authID = "${user?.sub}"`,
-    // sort: '-created',
-  })
-
-  // console.log('resultList', resultList)
-
-  if (resultList.length === 0) {
-    // User does not exist, add their information to the 'users' collection
-
-    try {
-      const record = await pb.collection('users').create({
-        userName: user?.name,
-        email: user?.email,
-        authID: user?.sub,
-      })
-
-      // console.log('user created', record)
-    } catch (e) {
-      // console.log('user creation failed', e)
+    if (!response.ok) {
+      throw new Error('Failed to create user.')
     }
-  } else {
-    // console.log('User already exists in the database.')
+
+    const data = await response.json()
+    console.log(data.result)
+
+    return data
+  } catch (error) {
+    console.error('Error creating user:', error)
   }
 }
 

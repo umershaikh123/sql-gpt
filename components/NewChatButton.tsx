@@ -22,6 +22,32 @@ interface Chat {
   messages: string[]
 }
 
+async function fetchUser(user: any) {
+  const userID = user?.sub
+  console.log('userID', userID)
+
+  try {
+    // Make a POST request to the API endpoint with the user data in the request body
+    const response = await fetch(`/api/pocketBase/users/${userID}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to get user.')
+    }
+
+    const data = await response.json()
+    console.log('data', data.result)
+
+    return data
+  } catch (error) {
+    console.error('Error fetching user:', error)
+  }
+}
+
 async function fetchConversations(user: any) {
   const pb = new PocketBase('http://127.0.0.1:8090')
   const authData = await pb.admins.authWithPassword(
@@ -29,9 +55,12 @@ async function fetchConversations(user: any) {
     process.env.pass || 'umer123456'
   )
 
-  const userResultList = await pb.collection('users').getFullList({
-    filter: `authID = "${user?.sub}"`,
-  })
+  const userResultList = await fetchUser(user)
+  console.log('userResultList', userResultList)
+
+  // const userResultList = await pb.collection('users').getFullList({
+  //   filter: `authID = "${user?.sub}"`,
+  // })
 
   // console.log('userResultList', userResultList)
 

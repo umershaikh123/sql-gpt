@@ -167,6 +167,16 @@ async function generateERFile(filePath: any) {
   }
 }
 
+const Messages: Message[] = [
+  { id: '1', role: 'user', content: 'hey' },
+  { id: '2', role: 'assistant', content: 'Hello! How can I assist you today?' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+  { id: '2', role: 'assistant', content: 'Hello! How can I assist you today?' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+  { id: '2', role: 'assistant', content: 'Hello! How can I assist you today?' },
+  { id: '3', role: 'user', content: 'just testing my new application' },
+]
+
 const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit, setMessages } =
     useChat()
@@ -184,13 +194,7 @@ const Chat = () => {
       try {
         const response = await fetch('/api/data/TEXT_ER/message')
         const chats = await response.json()
-        const chat = chats.find(chat => chat.id === chatId)
-        // const formattedSqlCode = SqlFormatter.format(chat.messages.Messages[chat.messages.Messages.length - 1].content)
-        // console.log('formattedSqlCode', formattedSqlCode)
-        // console.log(
-        //   'chat.messages.Messages.length -1',
-        //   chat.messages.Messages.length - 1
-        // )
+        const chat = chats.find((chat: any) => chat.id === chatId)
 
         console.log('chat.messages ', chat.messages.Messages)
         console.log('chat.content ', chat.messages.Messages[0].content)
@@ -215,7 +219,7 @@ const Chat = () => {
       }
     }
 
-    loadMessages()
+    // loadMessages()
   }, [chatId])
 
   const handleKeyDown = async (event: any) => {
@@ -228,21 +232,14 @@ const Chat = () => {
     event.preventDefault()
     handleSubmit(event)
 
+    // setMessages(messages)
     setMessages(messages)
-    await postMessage(chatId, messages)
-    const sqlFileName = await generateSqlFile(messages, chatId)
-    await generateERFile(sqlFileName)
+    console.log('messages = ', messages)
 
-    // await fetch('/api/format')
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     // Set the formatted SQL code in the state
-    //     setFormattedSqlCode(data.sqlCode)
-    //   })
-    //   .catch(error => {
-    //     // Handle any errors
-    //     console.error(error)
-    //   })
+    // await postMessage(chatId, messages)
+    // await postMessage(chatId, Messages)
+    // const sqlFileName = await generateSqlFile(messages, chatId)
+    // await generateERFile(sqlFileName)
   }
 
   return (
